@@ -73,7 +73,7 @@ namespace CSI_Prog5
         //Description: Abstract class to be overridden in child classes
         //             shows answer when user gives up
         public abstract void GaveUp();
-
+        
         //keeps track of the clue count
         private short cNum;
         public short ClueNum { get => cNum; set => rows = value; }

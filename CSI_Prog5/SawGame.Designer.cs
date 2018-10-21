@@ -35,7 +35,11 @@
             this.BloodS = new System.Windows.Forms.Button();
             this.Related = new System.Windows.Forms.Button();
             this.ClueDecision = new System.Windows.Forms.GroupBox();
+            this.RowsEntry = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.ColumnsEntry = new System.Windows.Forms.TextBox();
+            this.textGrid = new System.Windows.Forms.TextBox();
+            this.GenerateGrid = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.StartBackground)).BeginInit();
             this.ClueDecision.SuspendLayout();
             this.SuspendLayout();
@@ -103,6 +107,10 @@
             this.ClueDecision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.ClueDecision.BackColor = System.Drawing.Color.White;
             this.ClueDecision.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ClueDecision.Controls.Add(this.GenerateGrid);
+            this.ClueDecision.Controls.Add(this.textGrid);
+            this.ClueDecision.Controls.Add(this.ColumnsEntry);
+            this.ClueDecision.Controls.Add(this.RowsEntry);
             this.ClueDecision.Controls.Add(this.Fing);
             this.ClueDecision.Controls.Add(this.Related);
             this.ClueDecision.Controls.Add(this.BloodS);
@@ -115,6 +123,58 @@
             this.ClueDecision.TabStop = false;
             this.ClueDecision.Text = "What kind of Clue do whish to discover?";
             this.ClueDecision.Visible = false;
+            // 
+            // RowsEntry
+            // 
+            this.RowsEntry.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(25)))), ((int)(((byte)(64)))));
+            this.RowsEntry.ForeColor = System.Drawing.Color.White;
+            this.RowsEntry.Location = new System.Drawing.Point(105, 121);
+            this.RowsEntry.Name = "RowsEntry";
+            this.RowsEntry.Size = new System.Drawing.Size(426, 63);
+            this.RowsEntry.TabIndex = 7;
+            this.RowsEntry.Text = "Click here to enter the row size";
+            this.RowsEntry.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.RowsEntry.Visible = false;
+            this.RowsEntry.Enter += new System.EventHandler(this.RowsEntry_Enter);
+            // 
+            // ColumnsEntry
+            // 
+            this.ColumnsEntry.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(25)))), ((int)(((byte)(64)))));
+            this.ColumnsEntry.ForeColor = System.Drawing.Color.White;
+            this.ColumnsEntry.Location = new System.Drawing.Point(105, 190);
+            this.ColumnsEntry.Name = "ColumnsEntry";
+            this.ColumnsEntry.Size = new System.Drawing.Size(426, 63);
+            this.ColumnsEntry.TabIndex = 8;
+            this.ColumnsEntry.Text = "Click here to enter the column size";
+            this.ColumnsEntry.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ColumnsEntry.Visible = false;
+            this.ColumnsEntry.Enter += new System.EventHandler(this.ColumnEntry_Enter);
+            // 
+            // textGrid
+            // 
+            this.textGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.textGrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(25)))), ((int)(((byte)(64)))));
+            this.textGrid.ForeColor = System.Drawing.Color.White;
+            this.textGrid.Location = new System.Drawing.Point(105, 300);
+            this.textGrid.Multiline = true;
+            this.textGrid.Name = "textGrid";
+            this.textGrid.ReadOnly = true;
+            this.textGrid.Size = new System.Drawing.Size(426, 161);
+            this.textGrid.TabIndex = 9;
+            this.textGrid.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textGrid.Visible = false;
+            // 
+            // GenerateGrid
+            // 
+            this.GenerateGrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(25)))), ((int)(((byte)(64)))));
+            this.GenerateGrid.Location = new System.Drawing.Point(261, 467);
+            this.GenerateGrid.Name = "GenerateGrid";
+            this.GenerateGrid.Size = new System.Drawing.Size(103, 41);
+            this.GenerateGrid.TabIndex = 10;
+            this.GenerateGrid.Text = "Generate Grid";
+            this.GenerateGrid.UseVisualStyleBackColor = false;
+            this.GenerateGrid.Visible = false;
+            this.GenerateGrid.Click += new System.EventHandler(this.GenerateGrid_Click);
             // 
             // SawGame
             // 
@@ -132,6 +192,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.StartBackground)).EndInit();
             this.ClueDecision.ResumeLayout(false);
+            this.ClueDecision.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -145,6 +206,10 @@
         private System.Windows.Forms.Button Related;
         private System.Windows.Forms.GroupBox ClueDecision;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.TextBox RowsEntry;
+        private System.Windows.Forms.TextBox ColumnsEntry;
+        private System.Windows.Forms.TextBox textGrid;
+        private System.Windows.Forms.Button GenerateGrid;
     }
 }
 

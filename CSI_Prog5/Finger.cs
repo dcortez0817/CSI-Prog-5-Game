@@ -82,5 +82,19 @@ namespace CSI_Prog5
 
             ResetGrid();
         }
+
+        public string ToString()
+        {
+            string ret = "";
+            for (int r = 0; r < Rows; r++)
+            {
+                for (int c = 0; c < Columns; c++)
+                {
+                    ret += Array[r, c].Character.ToString();
+                }
+                ret += System.Environment.NewLine;
+            }
+            return ret;
+        }
     }
 }
