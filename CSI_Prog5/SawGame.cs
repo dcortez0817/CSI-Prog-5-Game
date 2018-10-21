@@ -1,16 +1,26 @@
-﻿using System;
+﻿/*Darien Cortez and Buddy Smith
+ * Program 5 - Finding Evidence Game
+ * This program utilizes polymorphism and inheritance to derive from an
+ * abstract analyzer base class and display three different scan Analyzers.
+ * The program allows the user to decide on the kind of evidence they wish to
+ * find -- both the BloodScan and the providingEvidence Analyzers use visual grids
+ * while the fingerprint Analyzer uses a textbox grid. Like the last program, the
+ * user's stats are provided at the end.
+ */
+
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Media;
+using CSIGame;//needed for Analyzer
 
 namespace CSI_Prog5
 {
     public partial class SawGame : Form
     {
-        //provides sound to the form
-        private SoundPlayer playsound;
-        private SoundPlayer playstatic;
-        
+        private Analyzer[] SC;//creates an array of Analyzers
+        private SoundPlayer playsound;//provides saw sound to the form
+        private SoundPlayer playstatic;//provides tv static sound to the form
         Image st = Properties.Resources.stat;//static background
         Image bth = Properties.Resources.bathroom;//creepy bathroom background
         Image saw = Properties.Resources.Saw;//blank saw background
