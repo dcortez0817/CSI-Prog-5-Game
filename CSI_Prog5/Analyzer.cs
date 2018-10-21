@@ -1,69 +1,54 @@
-﻿using System;
-namespace CSIGame
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CSI_Prog5
+
 {
-    abstract class Analyzer
+    class BloodScan : Analyzer
     {
-        //Constructor
-        //Parameters: 2 shorts, rows and columns, represent rows and 
-        //            columns of the analyzer matrix for storing clues
-        //return: na
-        //Description:Establishes a 2d or size rows and columns, the players
-        //            positions is set on the board instantiating Xpos and Ypos
-        protected Analyzer(short rows, short columns)
+        public BloodScan(short row, short col) :base(row, col)
         {
-            this.rows = rows;
-            this.columns = columns;
-            array = new Node[rows, columns];
-            xPos = yPos = 0;
-            Initialize();
+            Rand = new Random(Guid.NewGuid().GetHashCode());
+
+            //Generate up to 3 Blood traces
+            NumClues = Rand.Next(1, 3);
+         
+            for (int i = 0; i < NumClues; i++)
+                Randomize(i);
         }
-        //Initialize
-        //Parameters: none
-        //Return: None
-        //Descirption: Initializes elements of 2d array 
-        public void Initialize()
+        public override void Randomize(int i)
         {
-            for (int i = 0; i < rows; i++)
-                for (int j = 0; j < columns; j++)
-                    array[i, j] = new Node();
+            int x,
+                y;
+            
+            Rand = new Random(Guid.NewGuid().GetHashCode());
+            x = Rand.Next(1, Rows);
+            Rand = new Random(Guid.NewGuid().GetHashCode());
+            y = Rand.Next(1, Columns);
+            Array[x, y].ClueType = type;
+            Array[x, y].IsClue = true;
+            base.RCoord[i] = x;
+            base.CCoord[i] = y;
+
         }
-
-        //Randomize
-        //Returns: none
-        //Parameters: none
-        //Description: Abstract class to be overridden in child classes
-        //             Inserts clues on 2d array for game play. Each child class
-        //             will insert a clue at given points
-        public abstract void Randomize();
-
-        //CheckIfClue
-        //Parameters: 2 shorts r and c
-        //Return: bool
-        //Description: Abstract class to be overridden in child classes
-        //             Used to determine if a clue is residing on the matrix
-        //             at a given element
-        public abstract bool CheckIfClue(short c, short r);
-
-        //2d array of nodes representing game play
-        private Node[,] array;
-        public Node[,] Array { set => array = value; get => array; }
-        //Represent row of 2d matrix
-        private short rows;
-        public short Rows { get => rows; set => rows = value; }
-        //represents number of columns in matrix
-        private short columns;
-        public short Columns { get => columns; set => columns = value; }
-        //Stores the x coordinate of where the player is on the board
-        private short xPos;
-        public short XPos { get => xPos; set => xPos = value; }
-        //Stores the Y coordinate of the players current position
-        private short yPos;
-        public short YPos { get => yPos; set => yPos = value; }
-        //used to generate random numbers for clues
-        public Random Rand { get => rand; set => rand = value; }
-        private Random rand;
-        //Stores the number of clues in the array
-        private int numClues;
-        public int NumClues { get => numClues; set => numClues = value; }
+        public override bool CheckIfClue(short c, short r)
+        {
+            NumGuesses++;
+            this.XPos = r;
+            this.YPos = c;
+            Array[r, c].BeenChecked = true;
+            if(Array[r,c].ClueType == type)
+            {
+                RCoord.RemoveAt(0);
+                CCoord.RemoveAt(0);
+                Array[r, c].BeenFound = true;
+                return true;
+            }
+            return false;
+        }
+        private const string type = "BloodWork";
     }
 }

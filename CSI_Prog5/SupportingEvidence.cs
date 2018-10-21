@@ -1,20 +1,20 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace CSIGame
+namespace CSI_Prog5
 {
     class SupportingEvidence : Finger
     {
-        public SupportingEvidence(short r, short c) : base(r, c)
+        //SupportingEvidence
+        public  SupportingEvidence(short r, short c) : base(r,c)
         {
-            Rand = new Random(Guid.NewGuid().GetHashCode());
-
-            //Generate up to 3 Blood traces
-            NumClues = Rand.Next(1, 3);
-
             for (int i = 0; i < NumClues; i++)
-                Randomize();
+                Randomize(i);
         }
-        public override void Randomize()
+        public override void Randomize(int i)
         {
             int x,
                 y,
@@ -22,19 +22,32 @@ namespace CSIGame
             //Creat random X position
             Rand = new Random(Guid.NewGuid().GetHashCode());
             x = Rand.Next(1, Rows);
+
             //Creat random Y position
             Rand = new Random(Guid.NewGuid().GetHashCode());
             y = Rand.Next(1, Columns);
+
             //Create Random Clue to seed
             Rand = new Random(Guid.NewGuid().GetHashCode());
             clueIndex = Rand.Next(0, evidence.Length);
             Array[x, y].ClueType = evidence[clueIndex];
+            Array[x, y].IsClue = true;
+
+            //Store clue location in list
+            RCoord[i] = x;
+            CCoord[i] = y;
+
         }
-        public override bool CheckIfClue(short r, short c)
+        public override bool CheckIfClue(short c, short r)
         {
+            NumGuesses++;
+            this.XPos = r;
+            this.YPos = c;
             Array[r, c].BeenChecked = true;
             if (Array[r, c].IsClue == true)
             {
+                RCoord.RemoveAt(0);
+                CCoord.RemoveAt(0);
                 Array[r, c].BeenFound = true;
                 return true;
             }
