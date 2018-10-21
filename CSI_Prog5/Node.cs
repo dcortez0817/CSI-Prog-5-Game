@@ -13,6 +13,7 @@ namespace CSI_Prog5
             character = '~';
             isClue = false;
             beenFound = false;
+            img = null;
         }
 
         public Image Img { get => img; set => img = value; }
