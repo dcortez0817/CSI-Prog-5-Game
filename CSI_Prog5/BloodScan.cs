@@ -27,7 +27,7 @@ namespace CSI_Prog5
             {
                 Array[Rows, Columns].IsClue = true;
                 ResetGrid();
-                Array[Rows, Columns].Img = Properties.Resources.bloody_hand;//blood image
+                Array[Rows, Columns].Img = Properties.Resources.bloodyHand;//blood image
                 MessageBox.Show("You discovered blood EVERYWHERE...\nliterally everywhere.", "Nice.", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 ClueNum++;
             }
@@ -46,7 +46,7 @@ namespace CSI_Prog5
 
             //uses ternary operator to see if guess is to the left or to the right of the sample
             else
-                sign = YPos > CCoord[ClueNum] ? Properties.Resources.Less_Than : Properties.Resources.Greater_than;
+                sign = YPos > CCoord[ClueNum] ? Properties.Resources.lessThan : Properties.Resources.Greaterthan;
 
             return sign;
         }
@@ -57,7 +57,7 @@ namespace CSI_Prog5
             for (int i = 0; i < Rows; i++)
                 for (int j = 0; j < Columns; j++)
                 {
-                    if (Array[i, j].Img != Properties.Resources.bloody_hand)
+                    if (Array[i, j].Img != Properties.Resources.bloodyHand)
                     {
                         Array[i, j].Img = null;
                     }
@@ -67,7 +67,7 @@ namespace CSI_Prog5
         public override void GaveUp()
         {
             for (int i = 0; i < NumClues; i++)
-                Array[RCoord[i], CCoord[i]].Img = Properties.Resources.bloody_hand;
+                Array[RCoord[i], CCoord[i]].Img = Properties.Resources.bloodyHand;
 
             ResetGrid();
         }
