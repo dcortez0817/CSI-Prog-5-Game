@@ -12,13 +12,12 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Media;
-using CSIGame;//needed for Analyzer
 
 namespace CSI_Prog5
 {
     public partial class SawGame : Form
     {
-        private Analyzer[] SC;//creates an array of Analyzers
+        Analyzer side;
         private SoundPlayer playsound;//provides saw sound to the form
         private SoundPlayer playstatic;//provides tv static sound to the form
         Image st = Properties.Resources.stat;//static background
