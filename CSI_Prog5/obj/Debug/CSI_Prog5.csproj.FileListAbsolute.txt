@@ -1,0 +1,10 @@
+C:\Users\richard cortez\Documents\C#\CSI_Prog5\CSI_Prog5\bin\Debug\CSI_Prog5.exe.config
+C:\Users\richard cortez\Documents\C#\CSI_Prog5\CSI_Prog5\bin\Debug\CSI_Prog5.exe
+C:\Users\richard cortez\Documents\C#\CSI_Prog5\CSI_Prog5\bin\Debug\CSI_Prog5.pdb
+C:\Users\richard cortez\Documents\C#\CSI_Prog5\CSI_Prog5\obj\Debug\CSI_Prog5.csprojAssemblyReference.cache
+C:\Users\richard cortez\Documents\C#\CSI_Prog5\CSI_Prog5\obj\Debug\CSI_Prog5.Properties.Resources.resources
+C:\Users\richard cortez\Documents\C#\CSI_Prog5\CSI_Prog5\obj\Debug\CSI_Prog5.csproj.GenerateResource.cache
+C:\Users\richard cortez\Documents\C#\CSI_Prog5\CSI_Prog5\obj\Debug\CSI_Prog5.csproj.CoreCompileInputs.cache
+C:\Users\richard cortez\Documents\C#\CSI_Prog5\CSI_Prog5\obj\Debug\CSI_Prog5.exe
+C:\Users\richard cortez\Documents\C#\CSI_Prog5\CSI_Prog5\obj\Debug\CSI_Prog5.pdb
+C:\Users\richard cortez\Documents\C#\CSI_Prog5\CSI_Prog5\obj\Debug\CSI_Prog5.SawGame.resources
