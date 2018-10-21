@@ -31,15 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SawGame));
             this.StartBackground = new System.Windows.Forms.PictureBox();
             this.StartGame = new System.Windows.Forms.Button();
-            this.Fing = new System.Windows.Forms.Button();
-            this.BloodS = new System.Windows.Forms.Button();
-            this.Related = new System.Windows.Forms.Button();
             this.ClueDecision = new System.Windows.Forms.GroupBox();
-            this.RowsEntry = new System.Windows.Forms.TextBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.ColumnsEntry = new System.Windows.Forms.TextBox();
-            this.textGrid = new System.Windows.Forms.TextBox();
             this.GenerateGrid = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.Fing = new System.Windows.Forms.RadioButton();
+            this.BloodS = new System.Windows.Forms.RadioButton();
+            this.Related = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.StartBackground)).BeginInit();
             this.ClueDecision.SuspendLayout();
             this.SuspendLayout();
@@ -68,52 +65,15 @@
             this.StartGame.UseVisualStyleBackColor = false;
             this.StartGame.Click += new System.EventHandler(this.StartGame_Click);
             // 
-            // Fing
-            // 
-            this.Fing.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(25)))), ((int)(((byte)(64)))));
-            this.Fing.ForeColor = System.Drawing.Color.White;
-            this.Fing.Location = new System.Drawing.Point(105, 88);
-            this.Fing.Name = "Fing";
-            this.Fing.Size = new System.Drawing.Size(426, 63);
-            this.Fing.TabIndex = 2;
-            this.Fing.Text = "Finger Prints";
-            this.Fing.UseVisualStyleBackColor = false;
-            this.Fing.Click += new System.EventHandler(this.Fing_Click);
-            // 
-            // BloodS
-            // 
-            this.BloodS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(25)))), ((int)(((byte)(64)))));
-            this.BloodS.Location = new System.Drawing.Point(105, 199);
-            this.BloodS.Name = "BloodS";
-            this.BloodS.Size = new System.Drawing.Size(426, 68);
-            this.BloodS.TabIndex = 3;
-            this.BloodS.Text = "Blood Samples";
-            this.BloodS.UseVisualStyleBackColor = false;
-            this.BloodS.Click += new System.EventHandler(this.BloodS_Click);
-            // 
-            // Related
-            // 
-            this.Related.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(25)))), ((int)(((byte)(64)))));
-            this.Related.Location = new System.Drawing.Point(105, 315);
-            this.Related.Name = "Related";
-            this.Related.Size = new System.Drawing.Size(426, 63);
-            this.Related.TabIndex = 4;
-            this.Related.Text = "Evidence relating to the Crime";
-            this.Related.UseVisualStyleBackColor = false;
-            this.Related.Click += new System.EventHandler(this.Related_Click);
-            // 
             // ClueDecision
             // 
             this.ClueDecision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.ClueDecision.BackColor = System.Drawing.Color.White;
             this.ClueDecision.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClueDecision.Controls.Add(this.GenerateGrid);
-            this.ClueDecision.Controls.Add(this.textGrid);
-            this.ClueDecision.Controls.Add(this.ColumnsEntry);
-            this.ClueDecision.Controls.Add(this.RowsEntry);
-            this.ClueDecision.Controls.Add(this.Fing);
             this.ClueDecision.Controls.Add(this.Related);
             this.ClueDecision.Controls.Add(this.BloodS);
+            this.ClueDecision.Controls.Add(this.Fing);
+            this.ClueDecision.Controls.Add(this.GenerateGrid);
             this.ClueDecision.Font = new System.Drawing.Font("Lucida Sans Typewriter", 14.1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClueDecision.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClueDecision.Location = new System.Drawing.Point(379, 145);
@@ -123,46 +83,6 @@
             this.ClueDecision.TabStop = false;
             this.ClueDecision.Text = "What kind of Clue do whish to discover?";
             this.ClueDecision.Visible = false;
-            // 
-            // RowsEntry
-            // 
-            this.RowsEntry.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(25)))), ((int)(((byte)(64)))));
-            this.RowsEntry.ForeColor = System.Drawing.Color.White;
-            this.RowsEntry.Location = new System.Drawing.Point(105, 121);
-            this.RowsEntry.Name = "RowsEntry";
-            this.RowsEntry.Size = new System.Drawing.Size(426, 63);
-            this.RowsEntry.TabIndex = 7;
-            this.RowsEntry.Text = "Click here to enter the row size";
-            this.RowsEntry.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.RowsEntry.Visible = false;
-            this.RowsEntry.Enter += new System.EventHandler(this.RowsEntry_Enter);
-            // 
-            // ColumnsEntry
-            // 
-            this.ColumnsEntry.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(25)))), ((int)(((byte)(64)))));
-            this.ColumnsEntry.ForeColor = System.Drawing.Color.White;
-            this.ColumnsEntry.Location = new System.Drawing.Point(105, 190);
-            this.ColumnsEntry.Name = "ColumnsEntry";
-            this.ColumnsEntry.Size = new System.Drawing.Size(426, 63);
-            this.ColumnsEntry.TabIndex = 8;
-            this.ColumnsEntry.Text = "Click here to enter the column size";
-            this.ColumnsEntry.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ColumnsEntry.Visible = false;
-            this.ColumnsEntry.Enter += new System.EventHandler(this.ColumnEntry_Enter);
-            // 
-            // textGrid
-            // 
-            this.textGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.textGrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(25)))), ((int)(((byte)(64)))));
-            this.textGrid.ForeColor = System.Drawing.Color.White;
-            this.textGrid.Location = new System.Drawing.Point(105, 300);
-            this.textGrid.Multiline = true;
-            this.textGrid.Name = "textGrid";
-            this.textGrid.ReadOnly = true;
-            this.textGrid.Size = new System.Drawing.Size(426, 161);
-            this.textGrid.TabIndex = 9;
-            this.textGrid.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textGrid.Visible = false;
             // 
             // GenerateGrid
             // 
@@ -175,6 +95,36 @@
             this.GenerateGrid.UseVisualStyleBackColor = false;
             this.GenerateGrid.Visible = false;
             this.GenerateGrid.Click += new System.EventHandler(this.GenerateGrid_Click);
+            // 
+            // Fing
+            // 
+            this.Fing.Location = new System.Drawing.Point(14, 45);
+            this.Fing.Name = "Fing";
+            this.Fing.Size = new System.Drawing.Size(215, 36);
+            this.Fing.TabIndex = 11;
+            this.Fing.TabStop = true;
+            this.Fing.Text = "Finger Prints";
+            this.Fing.UseVisualStyleBackColor = true;
+            // 
+            // BloodS
+            // 
+            this.BloodS.Location = new System.Drawing.Point(14, 110);
+            this.BloodS.Name = "BloodS";
+            this.BloodS.Size = new System.Drawing.Size(215, 36);
+            this.BloodS.TabIndex = 12;
+            this.BloodS.TabStop = true;
+            this.BloodS.Text = "Blood Scan";
+            this.BloodS.UseVisualStyleBackColor = true;
+            // 
+            // Related
+            // 
+            this.Related.Location = new System.Drawing.Point(14, 175);
+            this.Related.Name = "Related";
+            this.Related.Size = new System.Drawing.Size(215, 36);
+            this.Related.TabIndex = 13;
+            this.Related.TabStop = true;
+            this.Related.Text = "Related Evidence";
+            this.Related.UseVisualStyleBackColor = true;
             // 
             // SawGame
             // 
@@ -192,7 +142,6 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.StartBackground)).EndInit();
             this.ClueDecision.ResumeLayout(false);
-            this.ClueDecision.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -201,15 +150,12 @@
 
         private System.Windows.Forms.PictureBox StartBackground;
         private System.Windows.Forms.Button StartGame;
-        private System.Windows.Forms.Button Fing;
-        private System.Windows.Forms.Button BloodS;
-        private System.Windows.Forms.Button Related;
         private System.Windows.Forms.GroupBox ClueDecision;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.TextBox RowsEntry;
-        private System.Windows.Forms.TextBox ColumnsEntry;
-        private System.Windows.Forms.TextBox textGrid;
         private System.Windows.Forms.Button GenerateGrid;
+        private System.Windows.Forms.RadioButton Related;
+        private System.Windows.Forms.RadioButton BloodS;
+        private System.Windows.Forms.RadioButton Fing;
     }
 }
 

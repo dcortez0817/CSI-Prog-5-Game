@@ -28,11 +28,6 @@ namespace CSI_Prog5
             //makes the clue group box transparent
             ClueDecision.Parent = StartBackground;
             ClueDecision.BackColor = Color.Transparent;
-
-            //stores the different Analyzers in an array
-            SC[0] = new Finger(row, col);
-            //SC[1] = new BloodScan(row, col);
-            //SC[2] = new SupportingEvidence(row, col);
         }
 
         //button to start the game
@@ -58,63 +53,13 @@ namespace CSI_Prog5
             playstatic.Play();
             StartBackground.Image = bth;//displays gameplay background
         }
-
-        private void Fing_Click(object sender, EventArgs e)
-        {
-            i = 0;
-            staticEffect();
-            ButtonClick();
-        }
-
-        private void BloodS_Click(object sender, EventArgs e)
-        {
-            i = 1;
-            staticEffect();
-            ButtonClick();
-        }
-
-        private void Related_Click(object sender, EventArgs e)
-        {
-            i = 2;
-            staticEffect();
-            ButtonClick();
-        }
-
         private void ButtonClick()
         {
             ClueDecision.Text = "Shall We Begin?";
-            RowsEntry.Visible = true;
-            Fing.Visible = false;
-            BloodS.Visible = false;
-            Related.Visible = false;
             GenerateGrid.Visible = true;
         }
-
-        private void RowsEntry_Enter(object sender, EventArgs e)
-        {
-            RowsEntry.Text = "";
-            Int16.TryParse(RowsEntry.Text, out row);
-            ColumnsEntry.Visible = true;
-
-        }
-
-        private void ColumnEntry_Enter(object sender, EventArgs e)
-        {
-            ColumnsEntry.Text = "";
-            Int16.TryParse(RowsEntry.Text, out col);
-            
-        }
-
         private void GenerateGrid_Click(object sender, EventArgs e)
         {
-            if (i == 0)
-                TextBoxGrid();
-        }
-
-        private void TextBoxGrid()
-        {
-            textGrid.Visible = true;
-            textGrid.Text = SC[i].ToString();
         }
 
         //stores 3 types of Analyzers in an array
