@@ -99,5 +99,41 @@
   <ItemGroup>
     <None Include="Resources\Saw1.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bong.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dna.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Greater than.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gun.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\isis-flag.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KKK.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\leadPipe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Less Than.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\marijuana.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Up.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Google.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

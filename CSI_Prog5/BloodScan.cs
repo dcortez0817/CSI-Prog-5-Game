@@ -1,90 +1,75 @@
 using System;
+using System.Drawing;
+using System.Windows.Forms;
 
-namespace testingGrounds
+namespace CSI_Prog5
+
 {
-    //Class : Finger (inherits from Analyzer)
-    //Class Members: All inherited from Analyzer Class
-    //               const string V
-    //Methods:override Randomize()
-    //        override CheckIfClue()
-    //        override ToString()
-    //        Inherited constructors from base class
-    class Finger : Analyzer
+    class BloodScan : Analyzer
     {
-        public Finger(short rows, short columns) : base(rows, columns)
-        { 
+        public BloodScan(short row, short col) :base(row, col)
+        {
+            //Generate up to 3 Blood traces
             Rand = new Random(Guid.NewGuid().GetHashCode());
+            NumClues = Rand.Next(1, 3);
+         
             for (int i = 0; i < NumClues; i++)
                 Randomize(i);
         }
 
-        //override Randomizer()
-        //Parameters:none
-        //Return:void
-        //Description: Creates random instances of clues on the 
-        //             matrix, sets clue type to Fingerprint
-        public override void Randomize(int i)
-        {
-            int x,
-                y;
-
-            Rand = new Random(Guid.NewGuid().GetHashCode());
-            x = Rand.Next(1, Rows);
-            Rand = new Random(Guid.NewGuid().GetHashCode());
-            y = Rand.Next(1, Columns);
-            Array[x, y].ClueType = V;
-            Array[x, y].IsClue = true;
-            base.RCoord[i] = x;
-            base.CCoord[i] = y;
-
-
-        }
-        //override CheckIfClue
-        //Parameters: short c and short r
-        //Return: bool
-        //Description: Checks if a clue resides in the matrix 
-        //             at Array[r,c]. The element is mark as 
-        //             checked always.Returns true or false
-        //             if element is a clue
-        public override bool CheckIfClue(short c, short r)
+        //checks if the clue is found
+        public override void CheckIfClue()
         {
             NumGuesses++;
-            XPos = r;
-            YPos = c;
-            Array[r, c].BeenChecked = true;
-            if (Array[r, c].ClueType == V)
+
+            //if guess is correct do the following
+            if (RCoord[ClueNum] == XPos && CCoord[ClueNum] == YPos)
             {
-                RCoord.RemoveAt(0);
-                CCoord.RemoveAt(0);
-                Array[r, c].BeenFound = true;
-                Array[r, c].Character = '@';
-                NumGuesses++;
-                return true;
+                Array[Rows, Columns].IsClue = true;
+                ResetGrid();
+                Array[Rows, Columns].Img = Properties.Resources.bloody_hand;//blood image
+                MessageBox.Show("You discovered blood EVERYWHERE...\nliterally everywhere.", "Nice.", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                ClueNum++;
             }
-           
-            return false;
+
+            else
+                Array[Rows, Columns].Img = IHint();
         }
 
-        //override ToString()
-        //Parameters: none
-        //Return: string
-        //Description: Returns a string contiaining 
-        public override string ToString()
+        //visually changes grid
+        private Image IHint()
         {
-            string ret = "";
-            for (int r = 0; r < Rows; r++)
-            {
-                for (int c = 0; c < Columns; c++)
-                {
-                    ret += Array[r, c].Character.ToString();
-                    ret += " ";
-                }
+            Image sign;
+            //uses ternary operator to see if guess is above or below the sample
+            if (NumGuesses % 2 == 0)
+                sign = XPos > RCoord[ClueNum] ? Properties.Resources.Up : Properties.Resources.down;
 
-            }
-            return ret;
+            //uses ternary operator to see if guess is to the left or to the right of the sample
+            else
+                sign = YPos > CCoord[ClueNum] ? Properties.Resources.Less_Than : Properties.Resources.Greater_than;
+
+            return sign;
         }
-     
 
-       
+        //any position not showing a bloody hand changes to empty
+        public override void ResetGrid()
+        {
+            for (int i = 0; i < Rows; i++)
+                for (int j = 0; j < Columns; j++)
+                {
+                    if (Array[i, j].Img != Properties.Resources.bloody_hand)
+                    {
+                        Array[i, j].Img = null;
+                    }
+                }
+        }
+
+        public override void GaveUp()
+        {
+            for (int i = 0; i < NumClues; i++)
+                Array[RCoord[i], CCoord[i]].Img = Properties.Resources.bloody_hand;
+
+            ResetGrid();
+        }
     }
 }

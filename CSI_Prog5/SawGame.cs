@@ -17,21 +17,24 @@ namespace CSI_Prog5
 {
     public partial class SawGame : Form
     {
-        Analyzer side;
-        private SoundPlayer playsound;//provides saw sound to the form
-        private SoundPlayer playstatic;//provides tv static sound to the form
-        Image st = Properties.Resources.stat;//static background
-        Image bth = Properties.Resources.bathroom;//creepy bathroom background
-        Image saw = Properties.Resources.Saw;//blank saw background
-
         public SawGame()
         {
             InitializeComponent();
+            //continuosly plays saw recording
             playsound = new SoundPlayer("Do you wanna play a game.wav");
             playsound.PlayLooping();
+
+            //makes the clue group box transparent
+            ClueDecision.Parent = StartBackground;
+            ClueDecision.BackColor = Color.Transparent;
+            
+            //stores the different Analyzers in an array
+            SC[0] = new Finger(row, col);
+            SC[1] = new BloodScan(row, col);
+            SC[2] = new SupportingEvidence(row, col);
         }
 
-        //button begin game
+        //button to start the game
         private void StartGame_Click(object sender, EventArgs e)
         {
             StartBackground.Image = saw;
@@ -42,9 +45,8 @@ namespace CSI_Prog5
                 "\nBUT THERE'S A CATCH.\n\nSolve the mystery or suffer the penalty.", "Objective");
             
             staticEffect();
-            StartBackground.Image = st;//quick static image
             StartGame.Visible = false;//gets rid of button
-            StartBackground.Image = bth;//displays gameplay background
+            ClueDecision.Visible = true;//clues group for the game
         }
         
         //quick static image and sound
@@ -53,6 +55,46 @@ namespace CSI_Prog5
             playstatic = new SoundPlayer("TV Static Sound Effect.wav");
             StartBackground.Image = st;
             playstatic.Play();
+            StartBackground.Image = bth;//displays gameplay background
         }
+
+        private void Fing_Click(object sender, EventArgs e)
+        {
+            staticEffect();
+            ButtonClick();
+        }
+
+        private void BloodS_Click(object sender, EventArgs e)
+        {
+            staticEffect();
+            ButtonClick();
+        }
+
+        private void Related_Click(object sender, EventArgs e)
+        {
+            staticEffect();
+            ButtonClick();
+        }
+
+        private void ButtonClick()
+        {
+            ClueDecision.Text = "Shall We Begin?";
+            Fing.Visible = false;
+            BloodS.Visible = false;
+            Related.Visible = false;
+        }
+
+        //stores 3 types of Analyzers in an array
+        Analyzer[] SC = new Analyzer[3];
+
+        //row & col are the grid dimensions
+        //rowG & colG are the dimensions of the users guess
+        short row, col, rowG, colG; 
+
+        private SoundPlayer playsound;//provides saw sound to the form
+        private SoundPlayer playstatic;//provides tv static sound to the form
+        Image st = Properties.Resources.stat;//static background
+        Image bth = Properties.Resources.bathroom;//creepy bathroom background
+        Image saw = Properties.Resources.Saw;//blank saw background
     }
 }

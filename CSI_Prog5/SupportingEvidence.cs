@@ -1,66 +1,98 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace CSI_Prog5
 {
     class SupportingEvidence : Finger
     {
-        //SupportingEvidence
         public  SupportingEvidence(short r, short c) : base(r,c)
         {
+            //Generates the same amount of supporting
+            //evidence as finger prints
             for (int i = 0; i < NumClues; i++)
                 Randomize(i);
         }
-        public override void Randomize(int i)
-        {
-            int x,
-                y,
-                clueIndex;
-            //Creat random X position
-            Rand = new Random(Guid.NewGuid().GetHashCode());
-            x = Rand.Next(1, Rows);
 
-            //Creat random Y position
-            Rand = new Random(Guid.NewGuid().GetHashCode());
-            y = Rand.Next(1, Columns);
-
-            //Create Random Clue to seed
-            Rand = new Random(Guid.NewGuid().GetHashCode());
-            clueIndex = Rand.Next(0, evidence.Length);
-            Array[x, y].ClueType = evidence[clueIndex];
-            Array[x, y].IsClue = true;
-
-            //Store clue location in list
-            RCoord[i] = x;
-            CCoord[i] = y;
-
-        }
-        public override bool CheckIfClue(short c, short r)
+        //checks if the clue is found
+        public override void CheckIfClue()
         {
             NumGuesses++;
-            this.XPos = r;
-            this.YPos = c;
-            Array[r, c].BeenChecked = true;
-            if (Array[r, c].IsClue == true)
+            //random image index for supporting evidence
+            Inum = Rand.Next(0, 7);
+
+            //if guess is correct do the following
+            if (RCoord[ClueNum] == XPos && CCoord[ClueNum] == YPos)
             {
-                RCoord.RemoveAt(0);
-                CCoord.RemoveAt(0);
-                Array[r, c].BeenFound = true;
-                return true;
+                Array[Rows, Columns].IsClue = true;
+                ResetGrid();
+                Array[Rows, Columns].Img = evidence[Inum];//random supporting evidence image
+                MessageBox.Show("You discovered " + evidenceMes[Inum], "Not Bad.", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                ClueNum++;
             }
-            return false;
+
+            else
+                Array[Rows, Columns].Img = IHint();
         }
-        private readonly string[] evidence ={ "ISIS Ties",
-                                              "Drug Paraphernalia",
-                                              "Drugs",
-                                              "Knife",
-                                              "Gun",
-                                              "KKK Pamphlet",
-                                              "Lead Pipe",
-                                              "Suspicious Google Search"
+
+        //visually changes grid
+        private Image IHint()
+        {
+            Image sign;
+            //uses ternary operator to see if guess is above or below the sample
+            if (NumGuesses % 2 == 0)
+                sign = XPos > RCoord[ClueNum] ? Properties.Resources.Up : Properties.Resources.down;
+
+            //uses ternary operator to see if guess is to the left or to the right of the sample
+            else
+                sign = YPos > CCoord[ClueNum] ? Properties.Resources.Less_Than : Properties.Resources.Greater_than;
+
+            return sign;
+        }
+
+        //any position not showing a form of supporting evidence changes to empty
+        public override void ResetGrid()
+        {
+            for (int i = 0; i < Rows; i++)
+                for (int j = 0; j < Columns; j++)
+                {
+                    if (Array[i, j].Img != evidence[Inum])
+                    {
+                        Array[i, j].Img = null;
+                    }
+                }
+        }
+
+        public override void GaveUp()
+        {
+            for (int i = 0; i < NumClues; i++)
+                Array[RCoord[i], CCoord[i]].Img = Properties.Resources.bloody_hand;
+
+            ResetGrid();
+        }
+
+        //random image index for supporting evidence
+        private int Inum;
+
+        //stores supporting evidence pictures in an array
+        private readonly Image[] evidence = { Properties.Resources.isis_flag,
+        Properties.Resources.bong, Properties.Resources.marijuana,
+        Properties.Resources.dna, Properties.Resources.gun,
+        Properties.Resources.KKK, Properties.Resources.leadPipe,
+        Properties.Resources.Google};
+
+        //generates a message based on the evidence discovery
+        private readonly string[] evidenceMes ={ "ISIS Ties",
+                                              "drug paraphernalia",
+                                              "drugs",
+                                              "some form of DNA",
+                                              "a gun",
+                                              "a KKK Pamphlet",
+                                              "a lead pipe",
+                                              "a suspicious Google search"
                                             };
+
+        
     }
+
+    
 }

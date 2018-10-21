@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CSI_Prog5
 {
@@ -16,79 +13,74 @@ namespace CSI_Prog5
     class Finger : Analyzer
     {
         public Finger(short rows, short columns) : base(rows, columns)
-        { 
+        {
+            //Generates up to 3 Finger Prints
             Rand = new Random(Guid.NewGuid().GetHashCode());
+            NumClues = Rand.Next(1, 3);
+
             for (int i = 0; i < NumClues; i++)
                 Randomize(i);
         }
 
-        //override Randomizer()
-        //Parameters:none
-        //Return:void
-        //Description: Creates random instances of clues on the 
-        //             matrix, sets clue type to Fingerprint
-        public override void Randomize(int i)
+        public void getguess(int rguess, int cguess)
         {
-            int x,
-                y;
-
-            Rand = new Random(Guid.NewGuid().GetHashCode());
-            x = Rand.Next(1, Rows);
-            Rand = new Random(Guid.NewGuid().GetHashCode());
-            y = Rand.Next(1, Columns);
-            Array[x, y].ClueType = V;
-            Array[x, y].IsClue = true;
-            base.RCoord[i] = x;
-            base.CCoord[i] = y;
-
-
+            XPos = (short)rguess;
+            YPos = (short)cguess;
         }
-        //override CheckIfClue
-        //Parameters: short c and short r
-        //Return: bool
-        //Description: Checks if a clue resides in the matrix 
-        //             at Array[r,c]. The element is mark as 
-        //             checked always.Returns true or false
-        //             if element is a clue
-        public override bool CheckIfClue(short c, short r)
+
+        //checks if the clue is found
+        public override void CheckIfClue()
         {
             NumGuesses++;
-            XPos = r;
-            YPos = c;
-            Array[r, c].BeenChecked = true;
-            if (Array[r, c].ClueType == V)
+
+            //if guess is correct do the following
+            if (RCoord[ClueNum] == XPos && CCoord[ClueNum] == YPos)
             {
-                RCoord.RemoveAt(0);
-                CCoord.RemoveAt(0);
-                Array[r, c].BeenFound = true;
-                Array[r, c].Character = '@';
-                NumGuesses++;
-                return true;
+                Array[Rows, Columns].IsClue = true;
+                ResetGrid();
+                Array[Rows, Columns].Character = 'X';
+                MessageBox.Show("You discovered fingerprints from something.", "Impressive.", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                ClueNum++;
             }
-           
-            return false;
+
+            else
+                Array[Rows, Columns].Character = Hint();
         }
 
-        //override ToString()
-        //Parameters: none
-        //Return: string
-        //Description: Returns a string contiaining 
-        public override string ToString()
+        //TextBox Grid version to return a string hint
+        private char Hint()
         {
-            string ret = "";
-            for (int r = 0; r < Rows; r++)
-            {
-                for (int c = 0; c < Columns; c++)
-                {
-                    ret += Array[r, c].Character.ToString();
-                    ret += " ";
-                }
+            char c;
+            //uses ternary operator to see if guess is above or below the sample
+            if (NumGuesses % 2 == 0)
+                c = XPos > RCoord[ClueNum] ? '^' : 'v';
 
-            }
-            return ret;
+            //uses ternary operator to see if guess is to the left or to the right of the sample
+            else
+                c = YPos > CCoord[ClueNum] ? '<' : '>';
+
+            return c;
         }
-     
 
-       
+        //any position not showing an @ symbol changes to empty
+        public override void ResetGrid()
+        {
+            for (int i = 0; i < Rows; i++)
+                for (int j = 0; j < Columns; j++)
+                {
+                    if (Array[i, j].Character != '@')
+                    {
+                        Array[i, j].Character = (char)0;//fills with NULL
+                    }
+                }
+        }
+
+        public override void GaveUp()
+        {
+            for (int i = 0; i < NumClues; i++)
+                Array[RCoord[i], CCoord[i]].Character = 'X';
+
+            ResetGrid();
+        }
     }
 }
