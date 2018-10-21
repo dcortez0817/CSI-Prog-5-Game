@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace testingGrounds
+namespace CSI_Prog5
 {
     //Class : Finger (inherits from Analyzer)
     //Class Members: All inherited from Analyzer Class
