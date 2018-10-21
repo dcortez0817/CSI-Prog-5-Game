@@ -67,7 +67,7 @@
             this.Controls.Add(this.StartBackground);
             this.Font = new System.Drawing.Font("Lucida Sans Typewriter", 14.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "SawGame";
             this.Text = "Do you Want to Play a Game?";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
