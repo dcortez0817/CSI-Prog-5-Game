@@ -1,14 +1,18 @@
-﻿using System;
-namespace CSIGame
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace testingGrounds
 {
     abstract class Analyzer
     {
-        //Constructor
-        //Parameters: 2 shorts, rows and columns, represent rows and 
-        //            columns of the analyzer matrix for storing clues
-        //return: na
-        //Description:Establishes a 2d or size rows and columns, the players
-        //            positions is set on the board instantiating Xpos and Ypos
+        //Analyzer()
+        //Parameters: short rows, short columns
+        //Return: NA
+        //Description:instantiates class objects and sets dimensions
+        //            of 2d array
         protected Analyzer(short rows, short columns)
         {
             this.rows = rows;
@@ -16,11 +20,18 @@ namespace CSIGame
             array = new Node[rows, columns];
             xPos = yPos = 0;
             Initialize();
+            numGuesses = 0;
+            
+            rCoord = new List<int>();
+            cCoord = new List<int>();
+            Initialize();
+            
         }
-        //Initialize
+
+        //Initialize()
         //Parameters: none
-        //Return: None
-        //Descirption: Initializes elements of 2d array 
+        //Return: none
+        //Description: Instantiates all member of 2d array to type Node
         public void Initialize()
         {
             for (int i = 0; i < rows; i++)
@@ -28,42 +39,71 @@ namespace CSIGame
                     array[i, j] = new Node();
         }
 
-        //Randomize
-        //Returns: none
-        //Parameters: none
-        //Description: Abstract class to be overridden in child classes
-        //             Inserts clues on 2d array for game play. Each child class
-        //             will insert a clue at given points
-        public abstract void Randomize();
-
-        //CheckIfClue
-        //Parameters: 2 shorts r and c
-        //Return: bool
-        //Description: Abstract class to be overridden in child classes
-        //             Used to determine if a clue is residing on the matrix
-        //             at a given element
+        // GetHint()
+        //Parameters:: None
+        //Return : char
+        //Description: Returns a hint based upon player position on 
+        //             the board
+        public char GetHint()
+        {
+            char hint;
+            //if on the same row, point left or right
+            if (XPos == RCoord.First())
+            {
+                hint = (CCoord.First() < YPos) ? '>' : '<';
+            }
+            else
+            {
+                hint = (RCoord.First() < XPos) ? '^' : 'V';
+            }
+            return hint;
+        }
+        public abstract void Randomize(int i);
         public abstract bool CheckIfClue(short c, short r);
-
-        //2d array of nodes representing game play
+      
+        //Array of Clues representing 1 2d array of possible clues
         private Node[,] array;
-        public Node[,] Array { set => array = value; get => array; }
-        //Represent row of 2d matrix
-        private short rows;
-        public short Rows { get => rows; set => rows = value; }
-        //represents number of columns in matrix
-        private short columns;
-        public short Columns { get => columns; set => columns = value; }
-        //Stores the x coordinate of where the player is on the board
-        private short xPos;
-        public short XPos { get => xPos; set => xPos = value; }
-        //Stores the Y coordinate of the players current position
-        private short yPos;
-        public short YPos { get => yPos; set => yPos = value; }
-        //used to generate random numbers for clues
+        public Node[,] Array { set=>array=value; get=>array; }
+
+        //represent rows in the 2d array
+        private int rows;
+        public int Rows { get=>rows; set=>rows=value; }
+
+        //represents number of columns in 2d array
+        private int columns;
+        public int Columns { get=>columns; set=>columns=value; }
+
+        //Represent players current x coordinate
+        private int xPos;
+        public int XPos { get => xPos; set => xPos = value; }
+
+        //Represents players current y coordinate
+        private int yPos;
+        public int YPos { get => yPos; set => yPos = value; }
+
+        //Random generator used to create random numbers
         public Random Rand { get => rand; set => rand = value; }
         private Random rand;
-        //Stores the number of clues in the array
-        private int numClues;
-        public int NumClues { get => numClues; set => numClues = value; }
+
+        //constant clues per instance to find
+        private static int numClues = 2;
+        public static int NumClues { get => numClues; set => numClues = value; }
+
+        //Number of guesses by player
+        private int numGuesses;
+        public int NumGuesses { get; set; }
+
+        //Used to store clues locations
+        //
+        private List<int> rCoord;
+        private List<int> cCoord;
+        public List<int> RCoord { get; set; }
+        public List<int> CCoord { get; set; }
+       
+
+        public const string V = "FingerPrint";
+
+
+
     }
 }
