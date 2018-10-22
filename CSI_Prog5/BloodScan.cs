@@ -1,75 +1,59 @@
 using System;
-using System.Drawing;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Drawing;
 namespace CSI_Prog5
-
 {
-    class BloodScan : Analyzer
+    class BloodScanner : Analyzer
     {
-        public BloodScan(short row, short col) :base(row, col)
+        public BloodScanner(int r, int c) : base(r, c)
         {
-            //Generate up to 3 Blood traces
-            Rand = new Random(Guid.NewGuid().GetHashCode());
-            NumClues = Rand.Next(1, 3);
-         
-            for (int i = 0; i < NumClues; i++)
-                Randomize(i);
+
         }
-
-        //checks if the clue is found
-        public override void CheckIfClue()
+        public override Image CheckIfClue(int rowGuess, int columnGuess)
         {
-            NumGuesses++;
-
-            //if guess is correct do the following
-            if (RCoord[ClueNum] == XPos && CCoord[ClueNum] == YPos)
+            //Set New Player Position [0] for row [1] for column
+            PlayerPos[0] = rowGuess;
+            PlayerPos[1] = columnGuess;
+            for (int i = 0; i < _NumOf; i++)
             {
-                Array[Rows, Columns].IsClue = true;
-                ResetGrid();
-                Array[Rows, Columns].Img = Properties.Resources.bloodyHand;//blood image
-                MessageBox.Show("You discovered blood EVERYWHERE...\nliterally everywhere.", "Nice.", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                ClueNum++;
-            }
-
-            else
-                Array[Rows, Columns].Img = IHint();
-        }
-
-        //visually changes grid
-        private Image IHint()
-        {
-            Image sign;
-            //uses ternary operator to see if guess is above or below the sample
-            if (NumGuesses % 2 == 0)
-                sign = XPos > RCoord[ClueNum] ? Properties.Resources.Up : Properties.Resources.down;
-
-            //uses ternary operator to see if guess is to the left or to the right of the sample
-            else
-                sign = YPos > CCoord[ClueNum] ? Properties.Resources.lessThan : Properties.Resources.Greaterthan;
-
-            return sign;
-        }
-
-        //any position not showing a bloody hand changes to empty
-        public override void ResetGrid()
-        {
-            for (int i = 0; i < Rows; i++)
-                for (int j = 0; j < Columns; j++)
+                if ((Clues[i].Rowcoordinates == rowGuess) && (Clues[i].ColumnCoordinates == columnGuess))
                 {
-                    if (Array[i, j].Img != Properties.Resources.bloodyHand)
-                    {
-                        Array[i, j].Img = null;
-                    }
+                    Clues.RemoveAt(i);
+                    return Clues[i].Img;
                 }
+            }
+            Image ret = GetHint();
+            return ret;
+
+            
         }
-
-        public override void GaveUp()
+        public override void Generate2Clues()
         {
-            for (int i = 0; i < NumClues; i++)
-                Array[RCoord[i], CCoord[i]].Img = Properties.Resources.bloodyHand;
+            for (int i = 0; i < _NumOf; i++)
+            {
+                //Generates random seed better than using time
+                RandomGenerator = new Random(Guid.NewGuid().GetHashCode());
+                Clues[i].Rowcoordinates = RandomGenerator.Next(0, TotalRows);
+                Clues[i].ColumnCoordinates = RandomGenerator.Next(0, TotalColumns);
 
-            ResetGrid();
+                //COME BACK AND SET TO FINGERPRINT JPG AFTER ADDING TO RESOURCES
+                Clues[i].Img = null;
+            }
+        }
+        public override Image GetHint()
+        {
+            if (PlayerPos[0] == Clues[0].Rowcoordinates)
+            {
+                return PlayerPos[0] < Clues[0].Rowcoordinates ? Properties.Resources.lessThan : Properties.Resources.Greaterthan;
+            }
+            else
+            {
+                return PlayerPos[1] < Clues[0].ColumnCoordinates ? Properties.Resources.Up : Properties.Resources.down;
+            }
         }
     }
 }
