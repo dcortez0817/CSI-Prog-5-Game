@@ -1,100 +1,75 @@
 using System;
-using System.Windows.Forms;
-
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Drawing;
 namespace CSI_Prog5
 {
-    //Class : Finger (inherits from Analyzer)
-    //Class Members: All inherited from Analyzer Class
-    //               const string V
-    //Methods:override Randomize()
-    //        override CheckIfClue()
-    //        override ToString()
-    //        Inherited constructors from base class
-    class Finger : Analyzer
+    class FPScanner : Analyzer
     {
-        public Finger(short rows, short columns) : base(rows, columns)
+        //FPScanner()
+        //Parameters: int row and column, representing the total size of the scanner array
+        //Returns:None
+        //Description: intializes the base class to size r x c
+        public FPScanner(int r, int c) : base(r, c)
         {
-            //Generates up to 3 Finger Prints
-            Rand = new Random(Guid.NewGuid().GetHashCode());
-            NumClues = Rand.Next(1, 3);
 
-            for (int i = 0; i < NumClues; i++)
-                Randomize(i);
         }
 
-        public void getguess(int rguess, int cguess)
+        //override CheckIfClue()
+        //Parameters: int rowGuess and columnGuess representing the row and column guess of the user
+        //Return: Bool(true if found, false if not found)
+        public override Image CheckIfClue(int rowGuess, int columnGuess)
         {
-            XPos = (short)rguess;
-            YPos = (short)cguess;
-        }
-
-        //checks if the clue is found
-        public override void CheckIfClue()
-        {
-            NumGuesses++;
-
-            //if guess is correct do the following
-            if (RCoord[ClueNum] == XPos && CCoord[ClueNum] == YPos)
+            //Set New Player Position [0] for row [1] for column
+            PlayerPos[0] = rowGuess;
+            PlayerPos[1] = columnGuess;
+            for (int i = 0; i < _NumOf; i++)
             {
-                Array[Rows, Columns].IsClue = true;
-                ResetGrid();
-                Array[Rows, Columns].Character = 'X';
-                MessageBox.Show("You discovered fingerprints from something.", "Impressive.", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                ClueNum++;
-            }
-
-            else
-                Array[Rows, Columns].Character = Hint();
-        }
-
-        //TextBox Grid version to return a string hint
-        private char Hint()
-        {
-            char c;
-            //uses ternary operator to see if guess is above or below the sample
-            if (NumGuesses % 2 == 0)
-                c = XPos > RCoord[ClueNum] ? '^' : 'v';
-
-            //uses ternary operator to see if guess is to the left or to the right of the sample
-            else
-                c = YPos > CCoord[ClueNum] ? '<' : '>';
-
-            return c;
-        }
-
-        //any position not showing an @ symbol changes to empty
-        public override void ResetGrid()
-        {
-            for (int i = 0; i < Rows; i++)
-                for (int j = 0; j < Columns; j++)
+                if ((Clues[i].Rowcoordinates == rowGuess) && (Clues[i].ColumnCoordinates == columnGuess))
                 {
-                    if (Array[i, j].Character != '@')
-                    {
-                        Array[i, j].Character = (char)0;//fills with NULL
-                    }
+                    Clues.RemoveAt(i);
+                    return Clues[i].Img;
                 }
-        }
-
-        public override void GaveUp()
-        {
-            for (int i = 0; i < NumClues; i++)
-                Array[RCoord[i], CCoord[i]].Character = 'X';
-
-            ResetGrid();
-        }
-
-        public string ToString()
-        {
-            string ret = "";
-            for (int r = 0; r < Rows; r++)
-            {
-                for (int c = 0; c < Columns; c++)
-                {
-                    ret += Array[r, c].Character.ToString();
-                }
-                ret += System.Environment.NewLine;
             }
+            Image ret = GetHint();
             return ret;
         }
+
+        //override Generate2Clues()
+        //Parameters: none
+        //Return: void
+        //Description: The method creates 2 random clues and stores the information in the List<ClueInfo> cluesOf
+        //             A fingerprint photo is inserted in the clue. 
+        public override void Generate2Clues()
+        {
+            for (int i = 0; i < _NumOf; i++)
+            {
+                //Generates random seed better than using time
+                RandomGenerator = new Random(Guid.NewGuid().GetHashCode());
+                Clues[i].Rowcoordinates = RandomGenerator.Next(0, TotalRows);
+                Clues[i].ColumnCoordinates = RandomGenerator.Next(0, TotalColumns);
+
+                //COME BACK AND SET TO FINGERPRINT JPG AFTER ADDING TO RESOURCES
+                Clues[i].Img = Properties.Resources.print;
+            }
+        }
+
+        //override GetHint()
+        //Parameters: none
+        //Return: none
+        //Description: The method returns a photo corresponding to a hint of the first
+        //             clue residing at clues[0]
+        public override Image GetHint()
+        {
+            if(PlayerPos[0] == Clues[0].Rowcoordinates)
+            {
+                return PlayerPos[0] < Clues[0].Rowcoordinates ? Properties.Resources.lessThan : Properties.Resources.Greaterthan;
+            }else{
+                return PlayerPos[1] < Clues[0].ColumnCoordinates ? Properties.Resources.Up : Properties.Resources.down;
+            }
+        }
+        
+
     }
-}
