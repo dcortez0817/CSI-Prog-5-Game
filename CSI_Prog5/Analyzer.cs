@@ -13,9 +13,9 @@ namespace CSI_Prog5
             //Set Total Columns and Rows for scanalyzer
             this.totalRows = totalRows;
             this.totalColumns = totalColumns;
-
+            
             //Initialize list to hold clueinfo for each clue
-            var clues = new List<ClueInfo>();
+            clues = new List<ClueInfo>();
             numberOfGuesses = 0;
 
             playerPos = new int[_NumOf];
@@ -33,7 +33,13 @@ namespace CSI_Prog5
         public int NumberOfGuesses { get; set; }
 
         private int[] playerPos;
-        public int[] PlayerPos { get; set; }
+        public int[] PlayerPos {
+            get
+            {
+                return playerPos;
+            }
+            set { }
+        }
 
         //Array of Images used in supportevidence clues
         private readonly Image[] supportEvidence ={ Properties.Resources.isis_flag,
@@ -53,7 +59,7 @@ namespace CSI_Prog5
         public int TotalColumns { get; set; }
 
         private List<ClueInfo> clues;
-        public List<ClueInfo> Clues { get; set; }
+        public List<ClueInfo> Clues { get { return clues; } set { clues = value; } }
 
         private Random randomGenerator;
         public Random RandomGenerator { get; set; }

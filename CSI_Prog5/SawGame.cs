@@ -70,7 +70,8 @@ namespace CSI_Prog5
         //the other button choices
         private void Fing_CheckedChanged(object sender, EventArgs e)
         {
-            analyzer = new FPScanner(row, col);
+            radioValue = 1;
+           // analyzer = new FPScanner(row, col);
             BloodS.Enabled = false;
             Related.Enabled = false;
             ButtonClick();//calls buttonclick function
@@ -80,6 +81,7 @@ namespace CSI_Prog5
         //the other button choices
         private void BloodS_CheckedChanged(object sender, EventArgs e)
         {
+            radioValue = 2;
             analyzer = new BloodScanner(row, col);
             Fing.Enabled = false;
             Related.Enabled = false;
@@ -90,6 +92,7 @@ namespace CSI_Prog5
         //and disable the other button choices
         private void Related_CheckedChanged(object sender, EventArgs e)
         {
+            radioValue = 3;
             analyzer = new SupportingEvidence(row, col);
             BloodS.Enabled = false;
             Fing.Enabled = false;
@@ -185,6 +188,8 @@ namespace CSI_Prog5
         //button to generate the grid; calls the DisplayGrid function
         private void GenerateGrid_Click(object sender, EventArgs e)
         {
+            if (radioValue == 1) analyzer = new FPScanner(row,col);
+        
             staticEffect();//gives tv static effect
             DisplayGrid();
             RowGuess.Visible = true;
@@ -195,9 +200,9 @@ namespace CSI_Prog5
         private void DisplayGrid ()
         {
             grid = new PictureBox[row, col];
-            for (i = 0; i < row; i++)
+            for (i = 1; i < row; i++)
             {
-                for (j = 0; j < col; j++)
+                for (j = 1; j < col; j++)
                 {
                     grid[i, j] = new PictureBox();
                     grid[i, j].BackColor = Color.White;
@@ -225,12 +230,13 @@ namespace CSI_Prog5
         //row & col - grid dimensions that the user sets
         //rowG & colG - grid points of the users guess
         //i & j- indices for the grid you display
-        int row, col, rowG, colG, i = 0, j = 0;
+        int row, col, rowG, colG, i, j;
 
         private SoundPlayer playsound;//provides saw sound to the form
         private SoundPlayer playstatic;//provides tv static sound to the form
 
-
+        private int radioValue;
+        public int RadioValue { get; set; }
         Image st = Properties.Resources.stat;//static background
         Image bth = Properties.Resources.bathroom;//creepy bathroom background
         Image saw = Properties.Resources.Saw;//blank saw background    

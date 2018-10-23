@@ -14,7 +14,9 @@ namespace CSI_Prog5
         //Description: intializes the base class to size r x c
         public FPScanner(int r, int c) : base(r, c)
         {
-
+            TotalRows = r;
+            TotalColumns = c;
+            Generate2Clues();
         }
 
         //override CheckIfClue()
@@ -48,11 +50,15 @@ namespace CSI_Prog5
             {
                 //Generates random seed better than using time
                 RandomGenerator = new Random(Guid.NewGuid().GetHashCode());
-                Clues[i].RowCoordinates = RandomGenerator.Next(0, TotalRows);
-                Clues[i].ColumnCoordinates = RandomGenerator.Next(0, TotalColumns);
+                Clues.Add(new ClueInfo() { RowCoordinates = RandomGenerator.Next(0, TotalRows),
+                                           ColumnCoordinates = RandomGenerator.Next(0, TotalColumns),
+                                           Img = Properties.Resources.fingerPrint} );
+                //Clues[i].Add(new ClueInfo() { })
+                //Clues[i].RowCoordinates = RandomGenerator.Next(0, TotalRows);
+                //Clues[i].ColumnCoordinates = RandomGenerator.Next(0, TotalColumns);
 
-                //COME BACK AND SET TO FINGERPRINT JPG AFTER ADDING TO RESOURCES
-                Clues[i].Img = Properties.Resources.fingerPrint;
+                ////COME BACK AND SET TO FINGERPRINT JPG AFTER ADDING TO RESOURCES
+                //Clues[i].Img = Properties.Resources.fingerPrint;
             }
         }
 
