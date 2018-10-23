@@ -97,7 +97,9 @@ namespace CSI_Prog5
         }
 
         //**********************************************************************
-        //user input for how many rows and columns they want on the grid
+        //these following 8 functions below deal with user input
+        //they allow the user to input the row size, column size, row position
+        //guess, and column position guess
         //_Enter and _Leave makes input act as placeholder
         //**********************************************************************
         private void RowEntry_Enter(object sender, EventArgs e)
@@ -105,7 +107,7 @@ namespace CSI_Prog5
             if (RowEntry.Text == "Enter the Row Size:")
             {
                 RowEntry.Text = "";
-                ColumnEntry.Enabled = true;
+                ColumnEntry.Enabled = true;//let's user enter the column size after rows are entered
             }
         }
         private void RowEntry_Leave(object sender, EventArgs e)
@@ -115,7 +117,7 @@ namespace CSI_Prog5
                 RowEntry.Text = "Enter the Row Size:";
                 
             }
-            Int32.TryParse(RowEntry.Text, out row);
+            Int32.TryParse(RowEntry.Text, out row);//puts result in row
         }
 
         private void ColumnEntry_Enter(object sender, EventArgs e)
@@ -125,8 +127,7 @@ namespace CSI_Prog5
                 ColumnEntry.Text = "";
                 
             }
-            Int32.TryParse(ColumnEntry.Text, out col);
-            GenerateGrid.Visible = true;
+            GenerateGrid.Visible = true;//makes the generateGrid button visible after columns are entered
         }
 
         private void ColumnEntry_Leave(object sender, EventArgs e)
@@ -136,7 +137,7 @@ namespace CSI_Prog5
                 ColumnEntry.Text = "Enter the Column Size:";
                 
             }
-            Int32.TryParse(ColumnEntry.Text, out col);
+            Int32.TryParse(ColumnEntry.Text, out col);//puts result on col
         }
 
         private void RowGuess_Enter(object sender, EventArgs e)
@@ -154,7 +155,7 @@ namespace CSI_Prog5
                 RowGuess.Text = "Enter your Row Guess:";
                 
             }
-            Int32.TryParse(RowGuess.Text, out rowG);
+            Int32.TryParse(RowGuess.Text, out rowG);//puts result in rowG
         }
 
         private void ColumnGuess_Enter(object sender, EventArgs e)
@@ -163,6 +164,7 @@ namespace CSI_Prog5
             {
                 ColumnGuess.Text = "";
             }
+            //makes the guess button available after the user guesses a column position
             GuessGrid.Visible = true;
         }
 
@@ -173,7 +175,7 @@ namespace CSI_Prog5
                 ColumnGuess.Text = "Enter your Column Guess:";
                 
             }
-            Int32.TryParse(ColumnGuess.Text, out colG);
+            Int32.TryParse(ColumnGuess.Text, out colG);//puts result in colG
 
         }
         //**********************************************************************
@@ -199,8 +201,8 @@ namespace CSI_Prog5
                 {
                     grid[i, j] = new PictureBox();
                     grid[i, j].BackColor = Color.White;
-                    //grid.Image = Properties.Resources.tilde;
-                    //grid.SizeMode = PictureBoxSizeMode.StretchImage;
+                    //grid[i, j].Image = Properties.Resources.tilde;
+                    grid[i, j].SizeMode = PictureBoxSizeMode.StretchImage;
                     grid[i, j].Height = 50;
                     grid[i, j].Width = 50;
                     grid[i, j].Location = new Point(620 + (i *55), 50 + (j*55));
@@ -209,7 +211,14 @@ namespace CSI_Prog5
                 }
             }
         }
-        
+
+        //button to update the grid after a guess.
+        private void GuessGrid_Click(object sender, EventArgs e)
+        {
+            grid[rowG, colG].Image = analyzer.CheckIfClue(rowG,colG);
+        }
+
+
         PictureBox[,] grid;//creates a 2D array and calls it grid
         Analyzer analyzer;//intializes an analyzer
 
@@ -217,11 +226,6 @@ namespace CSI_Prog5
         //rowG & colG - grid points of the users guess
         //i & j- indices for the grid you display
         int row, col, rowG, colG, i = 0, j = 0;
-
-        private void GuessGrid_Click(object sender, EventArgs e)
-        {
-            grid[rowG, colG].Image = analyzer.CheckIfClue(rowG, colG);
-        }
 
         private SoundPlayer playsound;//provides saw sound to the form
         private SoundPlayer playstatic;//provides tv static sound to the form
