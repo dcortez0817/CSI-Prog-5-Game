@@ -56,19 +56,90 @@ namespace CSI_Prog5
         private void ButtonClick()
         {
             ClueDecision.Text = "Shall We Begin?";
+            RowEntry.Visible = true;
+            ColumnEntry.Visible = true;
             GenerateGrid.Visible = true;
         }
         private void GenerateGrid_Click(object sender, EventArgs e)
         {
+            
+            DisplayGrid();
         }
 
-        //stores 3 types of Analyzers in an array
-        Analyzer[] SC;
-        int i;//index for SC
+        private void DisplayGrid ()
+        {
+            this.IsMdiContainer = true;
+            form2 = new Form();
+            form2.MdiParent = this;
+            form2.AutoSize = true;
+            form2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            form2.Show();
+
+            grid = new PictureBox[row, col];
+            
+
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < col; j++)
+                {
+                    grid[i, j] = new PictureBox();
+                    grid[i, j].Image = Properties.Resources.tilde;
+                    grid[i, j].SizeMode = PictureBoxSizeMode.StretchImage;
+                    grid[i, j].Height = 75;
+                    grid[i, j].Width = 75;
+                    grid[i, j].Location = new Point(i * 80, j * 80);
+                    form2.Controls.Add(grid[i, j]);
+                    
+                }
+            }
+                    StartBackground.Visible = false;
+        }
+        
+        private void RowEntry_Enter(object sender, EventArgs e)
+        {
+            RowEntry.Text = "";
+            Int32.TryParse(RowEntry.Text, out row);
+        }
+
+        private void ColumnEntry_Enter(object sender, EventArgs e)
+        {
+            ColumnEntry.Text = "";
+            Int32.TryParse(ColumnEntry.Text, out col);
+        }
+
+        private void Fing_CheckedChanged(object sender, EventArgs e)
+        {
+            analyzer = new FPScanner(row, col);
+            BloodS.Enabled = false;
+            Related.Enabled = false;
+            ButtonClick();
+        }
+
+        private void BloodS_CheckedChanged(object sender, EventArgs e)
+        {
+            analyzer = new BloodScanner(row, col);
+            Fing.Enabled = false;
+            Related.Enabled = false;
+            ButtonClick();
+        }
+
+        private void Related_CheckedChanged(object sender, EventArgs e)
+        {
+            analyzer = new SupportingEvidence(row, col);
+            BloodS.Enabled = false;
+            Fing.Enabled = false;
+            ButtonClick();
+        }
+
+        //intializes an analyzer
+        PictureBox[,] grid;
+        Analyzer analyzer;
+
+        Form form2;
 
         //row & col are the grid dimensions
         //rowG & colG are the dimensions of the users guess
-        short row, col, rowG, colG; 
+        int row, col, rowG, colG; 
 
         private SoundPlayer playsound;//provides saw sound to the form
         private SoundPlayer playstatic;//provides tv static sound to the form

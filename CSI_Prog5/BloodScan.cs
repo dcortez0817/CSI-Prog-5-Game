@@ -20,7 +20,7 @@ namespace CSI_Prog5
             PlayerPos[1] = columnGuess;
             for (int i = 0; i < _NumOf; i++)
             {
-                if ((Clues[i].Rowcoordinates == rowGuess) && (Clues[i].ColumnCoordinates == columnGuess))
+                if ((Clues[i].RowCoordinates == rowGuess) && (Clues[i].ColumnCoordinates == columnGuess))
                 {
                     Clues.RemoveAt(i);
                     return Clues[i].Img;
@@ -37,7 +37,7 @@ namespace CSI_Prog5
             {
                 //Generates random seed better than using time
                 RandomGenerator = new Random(Guid.NewGuid().GetHashCode());
-                Clues[i].Rowcoordinates = RandomGenerator.Next(0, TotalRows);
+                Clues[i].RowCoordinates = RandomGenerator.Next(0, TotalRows);
                 Clues[i].ColumnCoordinates = RandomGenerator.Next(0, TotalColumns);
 
                 //COME BACK AND SET TO FINGERPRINT JPG AFTER ADDING TO RESOURCES
@@ -46,9 +46,9 @@ namespace CSI_Prog5
         }
         public override Image GetHint()
         {
-            if (PlayerPos[0] == Clues[0].Rowcoordinates)
+            if (PlayerPos[0] == Clues[0].RowCoordinates)
             {
-                return PlayerPos[0] < Clues[0].Rowcoordinates ? Properties.Resources.lessThan : Properties.Resources.Greaterthan;
+                return PlayerPos[0] < Clues[0].RowCoordinates ? Properties.Resources.Less_Than : Properties.Resources.Greater_than;
             }
             else
             {

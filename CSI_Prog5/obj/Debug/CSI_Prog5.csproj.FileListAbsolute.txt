@@ -18,3 +18,4 @@ C:\Users\richard cortez\Documents\C#\CSI-Prog-5-Game\CSI_Prog5\obj\Debug\CSI_Pro
 C:\Users\richard cortez\Documents\C#\CSI-Prog-5-Game\CSI_Prog5\obj\Debug\CSI_Prog5.csproj.CoreCompileInputs.cache
 C:\Users\richard cortez\Documents\C#\CSI-Prog-5-Game\CSI_Prog5\obj\Debug\CSI_Prog5.exe
 C:\Users\richard cortez\Documents\C#\CSI-Prog-5-Game\CSI_Prog5\obj\Debug\CSI_Prog5.pdb
+C:\Users\richard cortez\Documents\C#\CSI-Prog-5-Game\CSI_Prog5\bin\Debug\Resources\tilde.jpg

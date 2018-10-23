@@ -26,7 +26,7 @@ namespace CSI_Prog5
         public abstract Image GetHint();
 
         //Array of Images used in supportevidence clues
-        private readonly Image[] supportEvidence ={ Properties.Resources.isisFlag,
+        private readonly Image[] supportEvidence ={ Properties.Resources.isis_flag,
                                                    Properties.Resources.bong,
                                                    Properties.Resources.marijuana,
                                                    Properties.Resources.dna,

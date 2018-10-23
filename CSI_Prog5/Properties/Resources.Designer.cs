@@ -113,6 +113,16 @@ namespace CSI_Prog5.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap fingerPrint {
+            get {
+                object obj = ResourceManager.GetObject("fingerPrint", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Google {
             get {
                 object obj = ResourceManager.GetObject("Google", resourceCulture);
@@ -216,6 +226,16 @@ namespace CSI_Prog5.Properties {
         internal static System.Drawing.Bitmap stat {
             get {
                 object obj = ResourceManager.GetObject("stat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tilde {
+            get {
+                object obj = ResourceManager.GetObject("tilde", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
