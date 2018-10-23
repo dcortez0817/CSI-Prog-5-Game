@@ -156,9 +156,15 @@ namespace CSI_Prog5
             if (RowGuess.Text == "")
             {
                 RowGuess.Text = "Enter your Row Guess:";
-                
+
             }
-            Int32.TryParse(RowGuess.Text, out rowG);//puts result in rowG
+            else
+            {
+                Int32.TryParse(RowGuess.Text, out rowG);//puts result in rowG
+                if (rowG > 1)
+                    rowG--;
+                else rowG = 0;
+            }
         }
 
         private void ColumnGuess_Enter(object sender, EventArgs e)
@@ -167,8 +173,10 @@ namespace CSI_Prog5
             {
                 ColumnGuess.Text = "";
             }
+           
             //makes the guess button available after the user guesses a column position
             GuessGrid.Visible = true;
+            
         }
 
         private void ColumnGuess_Leave(object sender, EventArgs e)
@@ -176,10 +184,16 @@ namespace CSI_Prog5
             if (ColumnGuess.Text == "")
             {
                 ColumnGuess.Text = "Enter your Column Guess:";
-                
-            }
-            Int32.TryParse(ColumnGuess.Text, out colG);//puts result in colG
 
+            }
+            else
+            {
+                Int32.TryParse(ColumnGuess.Text, out colG);//puts result in colG
+                if (colG > 1)
+                    colG--;
+                else colG = 0;
+            }
+            
         }
         //**********************************************************************
         //End of _Enter and _Leave functions for rows and columns
@@ -200,13 +214,14 @@ namespace CSI_Prog5
         private void DisplayGrid ()
         {
             grid = new PictureBox[row, col];
-            for (i = 1; i < row; i++)
+            
+            for (i = 0; i < row; i++)
             {
-                for (j = 1; j < col; j++)
+                for (j = 0; j < col; j++)
                 {
                     grid[i, j] = new PictureBox();
                     grid[i, j].BackColor = Color.White;
-                    //grid[i, j].Image = Properties.Resources.tilde;
+                    grid[i, j].Image = Properties.Resources.tilde;
                     grid[i, j].SizeMode = PictureBoxSizeMode.StretchImage;
                     grid[i, j].Height = 50;
                     grid[i, j].Width = 50;
