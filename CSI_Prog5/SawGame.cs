@@ -103,34 +103,78 @@ namespace CSI_Prog5
         private void RowEntry_Enter(object sender, EventArgs e)
         {
             if (RowEntry.Text == "Enter the Row Size:")
+            {
                 RowEntry.Text = "";
-
-            ColumnEntry.Enabled = true;
+                ColumnEntry.Enabled = true;
+            }
         }
         private void RowEntry_Leave(object sender, EventArgs e)
         {
             if (RowEntry.Text == "")
+            {
                 RowEntry.Text = "Enter the Row Size:";
-
+                
+            }
             Int32.TryParse(RowEntry.Text, out row);
         }
 
         private void ColumnEntry_Enter(object sender, EventArgs e)
         {
             if (ColumnEntry.Text == "Enter the Column Size:")
+            {
                 ColumnEntry.Text = "";
-
+                
+            }
             Int32.TryParse(ColumnEntry.Text, out col);
-
             GenerateGrid.Visible = true;
         }
 
         private void ColumnEntry_Leave(object sender, EventArgs e)
         {
             if (ColumnEntry.Text == "")
+            {
                 ColumnEntry.Text = "Enter the Column Size:";
-
+                
+            }
             Int32.TryParse(ColumnEntry.Text, out col);
+        }
+
+        private void RowGuess_Enter(object sender, EventArgs e)
+        {
+            if (RowGuess.Text == "Enter your Row Guess:")
+            {
+                RowGuess.Text = "";
+            }
+        }
+
+        private void RowGuess_Leave(object sender, EventArgs e)
+        {
+            if (RowGuess.Text == "")
+            {
+                RowGuess.Text = "Enter your Row Guess:";
+                
+            }
+            Int32.TryParse(RowGuess.Text, out rowG);
+        }
+
+        private void ColumnGuess_Enter(object sender, EventArgs e)
+        {
+            if (ColumnGuess.Text == "Enter your Column Guess:")
+            {
+                ColumnGuess.Text = "";
+            }
+            GuessGrid.Visible = true;
+        }
+
+        private void ColumnGuess_Leave(object sender, EventArgs e)
+        {
+            if (ColumnGuess.Text == "")
+            {
+                ColumnGuess.Text = "Enter your Column Guess:";
+                
+            }
+            Int32.TryParse(ColumnGuess.Text, out colG);
+
         }
         //**********************************************************************
         //End of _Enter and _Leave functions for rows and columns
@@ -141,6 +185,8 @@ namespace CSI_Prog5
         {
             staticEffect();//gives tv static effect
             DisplayGrid();
+            RowGuess.Visible = true;
+            ColumnGuess.Visible = true;
         }
 
         //creates a 2D array of pictureboxes
@@ -170,7 +216,12 @@ namespace CSI_Prog5
         //row & col - grid dimensions that the user sets
         //rowG & colG - grid points of the users guess
         //i & j- indices for the grid you display
-        int row, col, rowG, colG, i = 0, j = 0; 
+        int row, col, rowG, colG, i = 0, j = 0;
+
+        private void GuessGrid_Click(object sender, EventArgs e)
+        {
+            grid[rowG, colG].Image = analyzer.CheckIfClue(rowG, colG);
+        }
 
         private SoundPlayer playsound;//provides saw sound to the form
         private SoundPlayer playstatic;//provides tv static sound to the form

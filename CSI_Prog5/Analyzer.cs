@@ -22,8 +22,12 @@ namespace CSI_Prog5
         }
      
         public abstract void Generate2Clues();
-        public abstract Image CheckIfClue(int row, int column);
+        public abstract Image CheckIfClue(int row, int col);
         public abstract Image GetHint();
+        private int row;
+        public int Row { get; set; }
+        private int col;
+        public int Col { get => col; set => col = value; }
 
         private int numberOfGuesses;
         public int NumberOfGuesses { get; set; }

@@ -39,6 +39,9 @@
             this.GenerateGrid = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.StartBackground = new System.Windows.Forms.PictureBox();
+            this.RowGuess = new System.Windows.Forms.TextBox();
+            this.ColumnGuess = new System.Windows.Forms.TextBox();
+            this.GuessGrid = new System.Windows.Forms.Button();
             this.ClueDecision.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StartBackground)).BeginInit();
             this.SuspendLayout();
@@ -61,6 +64,9 @@
             this.ClueDecision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.ClueDecision.BackColor = System.Drawing.Color.White;
             this.ClueDecision.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ClueDecision.Controls.Add(this.GuessGrid);
+            this.ClueDecision.Controls.Add(this.ColumnGuess);
+            this.ClueDecision.Controls.Add(this.RowGuess);
             this.ClueDecision.Controls.Add(this.ColumnEntry);
             this.ClueDecision.Controls.Add(this.RowEntry);
             this.ClueDecision.Controls.Add(this.Related);
@@ -140,7 +146,7 @@
             // GenerateGrid
             // 
             this.GenerateGrid.BackColor = System.Drawing.Color.Gray;
-            this.GenerateGrid.Location = new System.Drawing.Point(300, 207);
+            this.GenerateGrid.Location = new System.Drawing.Point(300, 175);
             this.GenerateGrid.Name = "GenerateGrid";
             this.GenerateGrid.Size = new System.Drawing.Size(243, 41);
             this.GenerateGrid.TabIndex = 10;
@@ -159,6 +165,45 @@
             this.StartBackground.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.StartBackground.TabIndex = 0;
             this.StartBackground.TabStop = false;
+            // 
+            // RowGuess
+            // 
+            this.RowGuess.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(25)))), ((int)(((byte)(64)))));
+            this.RowGuess.ForeColor = System.Drawing.Color.White;
+            this.RowGuess.Location = new System.Drawing.Point(289, 269);
+            this.RowGuess.Name = "RowGuess";
+            this.RowGuess.Size = new System.Drawing.Size(266, 63);
+            this.RowGuess.TabIndex = 16;
+            this.RowGuess.Text = "Enter your Row Guess:";
+            this.RowGuess.Visible = false;
+            this.RowGuess.Enter += new System.EventHandler(this.RowGuess_Enter);
+            this.RowGuess.Leave += new System.EventHandler(this.RowGuess_Leave);
+            // 
+            // ColumnGuess
+            // 
+            this.ColumnGuess.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(25)))), ((int)(((byte)(64)))));
+            this.ColumnGuess.ForeColor = System.Drawing.Color.White;
+            this.ColumnGuess.Location = new System.Drawing.Point(289, 338);
+            this.ColumnGuess.Name = "ColumnGuess";
+            this.ColumnGuess.Size = new System.Drawing.Size(266, 63);
+            this.ColumnGuess.TabIndex = 17;
+            this.ColumnGuess.Text = "Enter your Column Guess:";
+            this.ColumnGuess.Visible = false;
+            this.ColumnGuess.Enter += new System.EventHandler(this.ColumnGuess_Enter);
+            this.ColumnGuess.Leave += new System.EventHandler(this.ColumnGuess_Leave);
+            // 
+            // GuessGrid
+            // 
+            this.GuessGrid.BackColor = System.Drawing.Color.Gray;
+            this.GuessGrid.ForeColor = System.Drawing.Color.White;
+            this.GuessGrid.Location = new System.Drawing.Point(300, 407);
+            this.GuessGrid.Name = "GuessGrid";
+            this.GuessGrid.Size = new System.Drawing.Size(243, 41);
+            this.GuessGrid.TabIndex = 18;
+            this.GuessGrid.Text = "Guess";
+            this.GuessGrid.UseVisualStyleBackColor = false;
+            this.GuessGrid.Visible = false;
+            this.GuessGrid.Click += new System.EventHandler(this.GuessGrid_Click);
             // 
             // SawGame
             // 
@@ -193,6 +238,9 @@
         private System.Windows.Forms.RadioButton Fing;
         private System.Windows.Forms.TextBox ColumnEntry;
         private System.Windows.Forms.TextBox RowEntry;
+        private System.Windows.Forms.Button GuessGrid;
+        private System.Windows.Forms.TextBox ColumnGuess;
+        private System.Windows.Forms.TextBox RowGuess;
     }
 }
 
