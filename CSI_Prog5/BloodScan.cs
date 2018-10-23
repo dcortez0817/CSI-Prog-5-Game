@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Drawing;
 namespace CSI_Prog5
 {
-    class BloodScanner : Analyzer
+    class BloodScanner : HairFiberScan
     {
         public BloodScanner(int r, int c) : base(r, c)
         {
@@ -48,7 +48,7 @@ namespace CSI_Prog5
         {
             if (PlayerPos[0] == Clues[0].RowCoordinates)
             {
-                return PlayerPos[0] < Clues[0].RowCoordinates ? Properties.Resources.Less_Than : Properties.Resources.Greater_than;
+                return PlayerPos[0] < Clues[0].RowCoordinates ? Properties.Resources.lessThan : Properties.Resources.Greaterthan;
             }
             else
             {
