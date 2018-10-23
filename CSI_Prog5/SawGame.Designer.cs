@@ -39,7 +39,6 @@
             this.GenerateGrid = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.StartBackground = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.ClueDecision.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StartBackground)).BeginInit();
             this.SuspendLayout();
@@ -158,20 +157,11 @@
             this.StartBackground.TabIndex = 0;
             this.StartBackground.TabStop = false;
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.panel1.Location = new System.Drawing.Point(67, 218);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(280, 257);
-            this.panel1.TabIndex = 6;
-            // 
             // SawGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(28F, 54F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1400, 784);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.ClueDecision);
             this.Controls.Add(this.StartGame);
             this.Controls.Add(this.StartBackground);
@@ -200,7 +190,6 @@
         private System.Windows.Forms.RadioButton Fing;
         private System.Windows.Forms.TextBox ColumnEntry;
         private System.Windows.Forms.TextBox RowEntry;
-        private System.Windows.Forms.Panel panel1;
     }
 }
 

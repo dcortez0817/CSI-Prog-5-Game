@@ -92,7 +92,6 @@ namespace CSI_Prog5
                     
                 }
             }
-                    StartBackground.Visible = false;
         }
         
         private void RowEntry_Enter(object sender, EventArgs e)
@@ -146,6 +145,6 @@ namespace CSI_Prog5
 
         Image st = Properties.Resources.stat;//static background
         Image bth = Properties.Resources.bathroom;//creepy bathroom background
-        Image saw = Properties.Resources.Saw;//blank saw background
+        Image saw = Properties.Resources.Saw;//blank saw background    
     }
 }
