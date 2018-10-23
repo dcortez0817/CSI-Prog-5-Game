@@ -18,9 +18,6 @@ namespace CSI_Prog5
             Clues[1].Img = SupportEvidence[secondPhoto];
             
         }
-
-
-        
     }
 
     

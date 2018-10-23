@@ -41,14 +41,14 @@ namespace CSI_Prog5
                 Clues[i].ColumnCoordinates = RandomGenerator.Next(0, TotalColumns);
 
                 //COME BACK AND SET TO FINGERPRINT JPG AFTER ADDING TO RESOURCES
-                Clues[i].Img = null;
+                Clues[i].Img = Properties.Resources.bloody_hand;
             }
         }
         public override Image GetHint()
         {
             if (PlayerPos[0] == Clues[0].RowCoordinates)
             {
-                return PlayerPos[0] < Clues[0].RowCoordinates ? Properties.Resources.lessThan : Properties.Resources.Greaterthan;
+                return PlayerPos[0] < Clues[0].RowCoordinates ? Properties.Resources.Less_Than : Properties.Resources.Greater_than;
             }
             else
             {

@@ -25,6 +25,12 @@ namespace CSI_Prog5
         public abstract Image CheckIfClue(int row, int column);
         public abstract Image GetHint();
 
+        private int numberOfGuesses;
+        public int NumberOfGuesses { get; set; }
+
+        private int[] playerPos;
+        public int[] PlayerPos { get; set; }
+
         //Array of Images used in supportevidence clues
         private readonly Image[] supportEvidence ={ Properties.Resources.isis_flag,
                                                    Properties.Resources.bong,
@@ -35,12 +41,6 @@ namespace CSI_Prog5
                                                    Properties.Resources.leadPipe,
                                                    Properties.Resources.Google
                                                    };
-        private int numberOfGuesses;
-        public int NumberOfGuesses { get; set; }
-
-        private int[] playerPos;
-        public int[] PlayerPos { get; set; }
-
 
         private int totalRows;
         public int TotalRows { get; set; }

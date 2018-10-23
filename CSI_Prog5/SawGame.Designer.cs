@@ -48,7 +48,7 @@
             this.StartGame.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.StartGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(0)))));
             this.StartGame.ForeColor = System.Drawing.Color.Olive;
-            this.StartGame.Location = new System.Drawing.Point(467, 691);
+            this.StartGame.Location = new System.Drawing.Point(785, 785);
             this.StartGame.Name = "StartGame";
             this.StartGame.Size = new System.Drawing.Size(467, 59);
             this.StartGame.TabIndex = 1;
@@ -69,9 +69,9 @@
             this.ClueDecision.Controls.Add(this.GenerateGrid);
             this.ClueDecision.Font = new System.Drawing.Font("Lucida Sans Typewriter", 14.1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClueDecision.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClueDecision.Location = new System.Drawing.Point(379, 145);
+            this.ClueDecision.Location = new System.Drawing.Point(379, 79);
             this.ClueDecision.Name = "ClueDecision";
-            this.ClueDecision.Size = new System.Drawing.Size(673, 514);
+            this.ClueDecision.Size = new System.Drawing.Size(1262, 700);
             this.ClueDecision.TabIndex = 5;
             this.ClueDecision.TabStop = false;
             this.ClueDecision.Text = "What kind of Clue do whish to discover?";
@@ -80,6 +80,7 @@
             // ColumnEntry
             // 
             this.ColumnEntry.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(25)))), ((int)(((byte)(64)))));
+            this.ColumnEntry.Enabled = false;
             this.ColumnEntry.ForeColor = System.Drawing.Color.White;
             this.ColumnEntry.Location = new System.Drawing.Point(289, 110);
             this.ColumnEntry.Name = "ColumnEntry";
@@ -88,6 +89,7 @@
             this.ColumnEntry.Text = "Enter the Column Size:";
             this.ColumnEntry.Visible = false;
             this.ColumnEntry.Enter += new System.EventHandler(this.ColumnEntry_Enter);
+            this.ColumnEntry.Leave += new System.EventHandler(this.ColumnEntry_Leave);
             // 
             // RowEntry
             // 
@@ -100,6 +102,7 @@
             this.RowEntry.Text = "Enter the Row Size:";
             this.RowEntry.Visible = false;
             this.RowEntry.Enter += new System.EventHandler(this.RowEntry_Enter);
+            this.RowEntry.Leave += new System.EventHandler(this.RowEntry_Leave);
             // 
             // Related
             // 
@@ -136,8 +139,8 @@
             // 
             // GenerateGrid
             // 
-            this.GenerateGrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(25)))), ((int)(((byte)(64)))));
-            this.GenerateGrid.Location = new System.Drawing.Point(205, 467);
+            this.GenerateGrid.BackColor = System.Drawing.Color.Gray;
+            this.GenerateGrid.Location = new System.Drawing.Point(300, 207);
             this.GenerateGrid.Name = "GenerateGrid";
             this.GenerateGrid.Size = new System.Drawing.Size(243, 41);
             this.GenerateGrid.TabIndex = 10;
@@ -152,7 +155,7 @@
             this.StartBackground.Image = global::CSI_Prog5.Properties.Resources.Saw1;
             this.StartBackground.Location = new System.Drawing.Point(0, 0);
             this.StartBackground.Name = "StartBackground";
-            this.StartBackground.Size = new System.Drawing.Size(1400, 784);
+            this.StartBackground.Size = new System.Drawing.Size(2037, 878);
             this.StartBackground.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.StartBackground.TabIndex = 0;
             this.StartBackground.TabStop = false;
@@ -161,7 +164,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(28F, 54F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1400, 784);
+            this.ClientSize = new System.Drawing.Size(2037, 878);
             this.Controls.Add(this.ClueDecision);
             this.Controls.Add(this.StartGame);
             this.Controls.Add(this.StartBackground);

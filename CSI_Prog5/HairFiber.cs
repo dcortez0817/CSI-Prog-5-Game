@@ -1,6 +1,7 @@
 using System;
-using System.Drawing();
-project CSI_Prog5
+using System.Drawing;
+
+namespace CSI_Prog5
 {
     abstract class HairFiberScan : Analyzer
     {
@@ -36,10 +37,10 @@ project CSI_Prog5
             return ret;
 
         }
-        public abstract Image GetHint(){
+        public override Image GetHint(){
             if (PlayerPos[0] == Clues[0].RowCoordinates)
             {
-                return PlayerPos[0] < Clues[0].RowCoordinates ? Properties.Resources.lessThan : Properties.Resources.Greaterthan;
+                return PlayerPos[0] < Clues[0].RowCoordinates ? Properties.Resources.Less_Than : Properties.Resources.Greater_than;
             }
             else
             {

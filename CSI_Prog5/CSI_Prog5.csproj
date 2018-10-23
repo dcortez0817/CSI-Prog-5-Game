@@ -48,6 +48,7 @@
     <Compile Include="Analyzer.cs" />
     <Compile Include="BloodScan.cs" />
     <Compile Include="Finger.cs" />
+    <Compile Include="HairFiber.cs" />
     <Compile Include="Resources\ClueInfo.cs" />
     <Compile Include="SawGame.cs">
       <SubType>Form</SubType>
