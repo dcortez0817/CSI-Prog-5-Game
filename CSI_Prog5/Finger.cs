@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
+
 namespace CSI_Prog5
 {
     class FPScanner : Analyzer
@@ -32,12 +29,13 @@ namespace CSI_Prog5
             {
                 if ((Clues[i].RowCoordinates == rowGuess) && (Clues[i].ColumnCoordinates == columnGuess))
                 {
+                    CluesFound++;
                     ret = Clues[i].Img;
                     Clues.RemoveAt(i);
                     return ret;
                 }
             }
-             ret = GetHint();
+            ret = GetHint();
             return ret;
         }
 
@@ -52,12 +50,15 @@ namespace CSI_Prog5
             {
                 //Generates random seed better than using time
                 RandomGenerator = new Random(Guid.NewGuid().GetHashCode());
-                Clues.Add(new ClueInfo() { RowCoordinates = RandomGenerator.Next(1, TotalRows),
-                                           ColumnCoordinates = RandomGenerator.Next(1, TotalColumns),
-                                           Img = Properties.Resources.fingerPrint} );
-                
+                Clues.Add(new ClueInfo()
+                {
+                    RowCoordinates = RandomGenerator.Next(0, TotalRows-1),
+                    ColumnCoordinates = RandomGenerator.Next(0, TotalColumns-1),
+                    Img = Properties.Resources.fingerPrint
+                });
 
-                
+
+
             }
         }
 

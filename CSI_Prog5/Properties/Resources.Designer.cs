@@ -123,6 +123,16 @@ namespace CSI_Prog5.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap goat {
+            get {
+                object obj = ResourceManager.GetObject("goat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Google {
             get {
                 object obj = ResourceManager.GetObject("Google", resourceCulture);
@@ -146,6 +156,16 @@ namespace CSI_Prog5.Properties {
         internal static System.Drawing.Bitmap gun {
             get {
                 object obj = ResourceManager.GetObject("gun", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hair {
+            get {
+                object obj = ResourceManager.GetObject("hair", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
