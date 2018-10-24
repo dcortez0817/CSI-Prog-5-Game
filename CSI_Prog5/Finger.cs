@@ -52,8 +52,8 @@ namespace CSI_Prog5
             {
                 //Generates random seed better than using time
                 RandomGenerator = new Random(Guid.NewGuid().GetHashCode());
-                Clues.Add(new ClueInfo() { RowCoordinates = RandomGenerator.Next(0, TotalRows),
-                                           ColumnCoordinates = RandomGenerator.Next(0, TotalColumns),
+                Clues.Add(new ClueInfo() { RowCoordinates = RandomGenerator.Next(1, TotalRows),
+                                           ColumnCoordinates = RandomGenerator.Next(1, TotalColumns),
                                            Img = Properties.Resources.fingerPrint} );
                 //Clues[i].Add(new ClueInfo() { })
                 //Clues[i].RowCoordinates = RandomGenerator.Next(0, TotalRows);

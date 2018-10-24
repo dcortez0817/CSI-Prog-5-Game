@@ -71,9 +71,9 @@ namespace CSI_Prog5
         private void Fing_CheckedChanged(object sender, EventArgs e)
         {
             radioValue = 1;
-           // analyzer = new FPScanner(row, col);
             BloodS.Enabled = false;
             Related.Enabled = false;
+            Hair.Enabled = false;
             ButtonClick();//calls buttonclick function
         }
 
@@ -82,9 +82,9 @@ namespace CSI_Prog5
         private void BloodS_CheckedChanged(object sender, EventArgs e)
         {
             radioValue = 2;
-            analyzer = new BloodScanner(row, col);
             Fing.Enabled = false;
             Related.Enabled = false;
+            Hair.Enabled = false;
             ButtonClick();//calls buttonclick function
         }
 
@@ -93,9 +93,18 @@ namespace CSI_Prog5
         private void Related_CheckedChanged(object sender, EventArgs e)
         {
             radioValue = 3;
-            analyzer = new SupportingEvidence(row, col);
             BloodS.Enabled = false;
             Fing.Enabled = false;
+            Hair.Enabled = false;
+            ButtonClick();//calls buttonclick function
+        }
+
+        private void Hair_CheckedChanged(object sender, EventArgs e)
+        {
+            radioValue = 4;
+            BloodS.Enabled = false;
+            Fing.Enabled = false;
+            Related.Enabled = false;
             ButtonClick();//calls buttonclick function
         }
 
@@ -202,19 +211,44 @@ namespace CSI_Prog5
         //button to generate the grid; calls the DisplayGrid function
         private void GenerateGrid_Click(object sender, EventArgs e)
         {
-            if (radioValue == 1) analyzer = new FPScanner(row,col);
-        
-            staticEffect();//gives tv static effect
-            DisplayGrid();
-            RowGuess.Visible = true;
-            ColumnGuess.Visible = true;
+            //only allows the dimensions to be between 2x2 and 10x10
+            if (row > 10 || row < 2 || col > 10 || col < 2)
+                MessageBox.Show("You must enter numbers between 2 and 10, you hooligan.",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            else
+            {
+                switch (radioValue)
+                {
+                    case 1:
+                        analyzer = new FPScanner(row, col);
+                        break;
+
+                    case 2:
+                        analyzer = new BloodScanner(row, col);
+                        break;
+
+                    case 3:
+                        analyzer = new SupportingEvidence(row, col);
+                        break;
+
+                    case 4:
+                        analyzer = new HairFiberScan(row, col);
+                        break;
+                }
+
+                staticEffect();//gives tv static effect
+                DisplayGrid();
+                RowGuess.Visible = true;
+                ColumnGuess.Visible = true;
+            }
         }
 
-        //creates a 2D array of pictureboxes
+        //creates a 2D array of pictureboxes and sets their properties
         private void DisplayGrid ()
         {
             grid = new PictureBox[row, col];
-            
+
             for (i = 0; i < row; i++)
             {
                 for (j = 0; j < col; j++)
@@ -225,9 +259,9 @@ namespace CSI_Prog5
                     grid[i, j].SizeMode = PictureBoxSizeMode.StretchImage;
                     grid[i, j].Height = 50;
                     grid[i, j].Width = 50;
-                    grid[i, j].Location = new Point(620 + (i *55), 50 + (j*55));
+                    grid[i, j].Location = new Point(620 + (i * 55), 50 + (j * 55));
                     grid[i, j].Anchor = AnchorStyles.Top;
-                    ClueDecision.Controls.Add(grid[i,j]);
+                    ClueDecision.Controls.Add(grid[i, j]);
                 }
             }
         }
@@ -235,7 +269,12 @@ namespace CSI_Prog5
         //button to update the grid after a guess.
         private void GuessGrid_Click(object sender, EventArgs e)
         {
-            grid[rowG, colG].Image = analyzer.CheckIfClue(rowG,colG);
+            //only allows the guesses for dimensions to be within the grid dimensions
+            if (rowG > row || rowG <= 1 || colG > col || colG <= 1)
+                MessageBox.Show("You must enter a guess within the dimensions of the evidence " +
+                    "grid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                grid[rowG, colG].Image = analyzer.CheckIfClue(rowG,colG);
         }
 
 

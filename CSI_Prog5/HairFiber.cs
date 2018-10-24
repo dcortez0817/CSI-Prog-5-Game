@@ -3,11 +3,13 @@ using System.Drawing;
 
 namespace CSI_Prog5
 {
-    abstract class HairFiberScan : Analyzer
+    class HairFiberScan : Analyzer
     {
         public HairFiberScan(int r, int c) : base(r,c)
         {
-            
+            TotalRows = r;
+            TotalColumns = c;
+            Generate2Clues();
         }
         public override void Generate2Clues(){
               for (int i = 0; i < _NumOf; i++)
