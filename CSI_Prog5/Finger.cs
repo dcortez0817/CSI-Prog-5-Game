@@ -24,18 +24,20 @@ namespace CSI_Prog5
         //Return: Bool(true if found, false if not found)
         public override Image CheckIfClue(int rowGuess, int columnGuess)
         {
+            Image ret;
             //Set New Player Position [0] for row [1] for column
             PlayerPos[0] = rowGuess;
             PlayerPos[1] = columnGuess;
-            for (int i = 0; i < _NumOf; i++)
+            for (int i = 0; i < Clues.Count; i++)
             {
                 if ((Clues[i].RowCoordinates == rowGuess) && (Clues[i].ColumnCoordinates == columnGuess))
                 {
+                    ret = Clues[i].Img;
                     Clues.RemoveAt(i);
-                    return Clues[i].Img;
+                    return ret;
                 }
             }
-            Image ret = GetHint();
+             ret = GetHint();
             return ret;
         }
 
@@ -71,11 +73,11 @@ namespace CSI_Prog5
         {
             if (PlayerPos[0] == Clues[0].RowCoordinates)
             {
-                return PlayerPos[0] < Clues[0].RowCoordinates ? Properties.Resources.Less_Than : Properties.Resources.Greater_than;
+                return Clues[0].ColumnCoordinates < PlayerPos[1] ? Properties.Resources.Less_Than : Properties.Resources.Greater_than;
             }
             else
             {
-                return PlayerPos[1] < Clues[0].ColumnCoordinates ? Properties.Resources.Up : Properties.Resources.down;
+                return Clues[0].RowCoordinates < PlayerPos[0] ? Properties.Resources.Up : Properties.Resources.down;
             }
         }
 
