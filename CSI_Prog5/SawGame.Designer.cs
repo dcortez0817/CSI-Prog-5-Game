@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SawGame));
             this.StartGame = new System.Windows.Forms.Button();
             this.ClueDecision = new System.Windows.Forms.GroupBox();
+            this.Hair = new System.Windows.Forms.RadioButton();
             this.GuessGrid = new System.Windows.Forms.Button();
             this.ColumnGuess = new System.Windows.Forms.TextBox();
             this.RowGuess = new System.Windows.Forms.TextBox();
@@ -42,7 +43,6 @@
             this.GenerateGrid = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.StartBackground = new System.Windows.Forms.PictureBox();
-            this.Hair = new System.Windows.Forms.RadioButton();
             this.ClueDecision.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StartBackground)).BeginInit();
             this.SuspendLayout();
@@ -84,6 +84,18 @@
             this.ClueDecision.TabStop = false;
             this.ClueDecision.Text = "What kind of Clue do whish to discover?";
             this.ClueDecision.Visible = false;
+            // 
+            // Hair
+            // 
+            this.Hair.Location = new System.Drawing.Point(14, 244);
+            this.Hair.Name = "Hair";
+            this.Hair.Size = new System.Drawing.Size(215, 63);
+            this.Hair.TabIndex = 19;
+            this.Hair.TabStop = true;
+            this.Hair.Text = "Hair Fibers";
+            this.Hair.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Hair.UseVisualStyleBackColor = true;
+            this.Hair.CheckedChanged += new System.EventHandler(this.Hair_CheckedChanged);
             // 
             // GuessGrid
             // 
@@ -206,18 +218,6 @@
             this.StartBackground.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.StartBackground.TabIndex = 0;
             this.StartBackground.TabStop = false;
-            // 
-            // Hair
-            // 
-            this.Hair.Location = new System.Drawing.Point(14, 244);
-            this.Hair.Name = "Hair";
-            this.Hair.Size = new System.Drawing.Size(215, 63);
-            this.Hair.TabIndex = 19;
-            this.Hair.TabStop = true;
-            this.Hair.Text = "Hair Fibers";
-            this.Hair.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Hair.UseVisualStyleBackColor = true;
-            this.Hair.CheckedChanged += new System.EventHandler(this.Hair_CheckedChanged);
             // 
             // SawGame
             // 

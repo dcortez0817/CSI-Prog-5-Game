@@ -169,7 +169,7 @@ namespace CSI_Prog5
             }
             else
             {
-                Int32.TryParse(RowGuess.Text, out rowG);//puts result in rowG
+            Int32.TryParse(RowGuess.Text, out rowG);//puts result in rowG
                 if (rowG > 1)
                     rowG--;
                 else rowG = 0;
@@ -199,7 +199,7 @@ namespace CSI_Prog5
             {
                 Int32.TryParse(ColumnGuess.Text, out colG);//puts result in colG
                 if (colG > 1)
-                    colG--;
+                   colG--;
                 else colG = 0;
             }
             
@@ -270,11 +270,11 @@ namespace CSI_Prog5
         private void GuessGrid_Click(object sender, EventArgs e)
         {
             //only allows the guesses for dimensions to be within the grid dimensions
-            if (rowG > row || rowG < 1 || colG > col || colG < 1)
+            if (rowG > row || rowG < 0 || colG > col || colG < 0)
                 MessageBox.Show("You must enter a guess within the dimensions of the evidence " +
                     "grid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
-                grid[rowG, colG].Image = analyzer.CheckIfClue(rowG,colG);
+                grid[colG, rowG].Image = analyzer.CheckIfClue(rowG, colG);
         }
 
 
