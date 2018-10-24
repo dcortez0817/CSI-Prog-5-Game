@@ -270,7 +270,7 @@ namespace CSI_Prog5
         private void GuessGrid_Click(object sender, EventArgs e)
         {
             //only allows the guesses for dimensions to be within the grid dimensions
-            if (rowG > row || rowG <= 1 || colG > col || colG <= 1)
+            if (rowG > row || rowG < 1 || colG > col || colG < 1)
                 MessageBox.Show("You must enter a guess within the dimensions of the evidence " +
                     "grid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
