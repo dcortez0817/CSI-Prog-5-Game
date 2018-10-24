@@ -55,12 +55,9 @@ namespace CSI_Prog5
                 Clues.Add(new ClueInfo() { RowCoordinates = RandomGenerator.Next(1, TotalRows),
                                            ColumnCoordinates = RandomGenerator.Next(1, TotalColumns),
                                            Img = Properties.Resources.fingerPrint} );
-                //Clues[i].Add(new ClueInfo() { })
-                //Clues[i].RowCoordinates = RandomGenerator.Next(0, TotalRows);
-                //Clues[i].ColumnCoordinates = RandomGenerator.Next(0, TotalColumns);
+                
 
-                ////COME BACK AND SET TO FINGERPRINT JPG AFTER ADDING TO RESOURCES
-                //Clues[i].Img = Properties.Resources.fingerPrint;
+                
             }
         }
 
